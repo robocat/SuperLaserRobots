@@ -18,6 +18,7 @@
 		8162EF421A85752E00B230AD /* Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF411A85752E00B230AD /* Mirror.swift */; };
 		8162EF441A85755300B230AD /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF431A85755300B230AD /* Map.swift */; };
 		8162EF461A8575B300B230AD /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF451A8575B300B230AD /* Controls.swift */; };
+		8162EF481A85780D00B230AD /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF471A85780D00B230AD /* Projectile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		8162EF411A85752E00B230AD /* Mirror.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mirror.swift; sourceTree = "<group>"; };
 		8162EF431A85755300B230AD /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		8162EF451A8575B300B230AD /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
+		8162EF471A85780D00B230AD /* Projectile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				8162EF411A85752E00B230AD /* Mirror.swift */,
 				8162EF431A85755300B230AD /* Map.swift */,
 				8162EF451A8575B300B230AD /* Controls.swift */,
+				8162EF471A85780D00B230AD /* Projectile.swift */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				8162EF421A85752E00B230AD /* Mirror.swift in Sources */,
 				8162EF1F1A8572EA00B230AD /* GameScene.swift in Sources */,
 				8162EF461A8575B300B230AD /* Controls.swift in Sources */,
+				8162EF481A85780D00B230AD /* Projectile.swift in Sources */,
 				8162EF3E1A85739E00B230AD /* Extensions.swift in Sources */,
 				8162EF441A85755300B230AD /* Map.swift in Sources */,
 				8162EF1D1A8572E900B230AD /* AppDelegate.swift in Sources */,
