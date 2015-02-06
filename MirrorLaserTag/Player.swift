@@ -8,6 +8,20 @@
 
 import SpriteKit
 
-class Player: SKSpriteNode {
-    
+class Player : SKSpriteNode {
+	var direction : CGFloat = 0 { didSet { updateDirection() } }
+	
+	override init() {
+		let texture = SKTexture(imageNamed: "Spaceship")
+		super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
+		direction = 0
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+	func updateDirection() {
+		zRotation = direction
+	}
 }
