@@ -8,11 +8,11 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func didMoveToView(view: SKView) {
-        
+        physicsWorld.contactDelegate = self
     }
     
     override func mouseDown(theEvent: NSEvent) {
@@ -22,4 +22,17 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+	
+	// MARK: SKPhysicsContactDelegate
+	
+	func didBeginContact(contact: SKPhysicsContact) {
+		let collision = contact.bodyA.collisionBitMask | contact.bodyB.collisionBitMask
+		switch collision {
+		case PhysicsType.Projectile.rawValue | PhysicsType.Mirror.rawValue:
+			// Change the trajectory and/or velocity of the projectile
+			return
+		default:
+			return
+		}
+	}
 }

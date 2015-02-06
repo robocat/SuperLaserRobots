@@ -9,5 +9,11 @@
 import SpriteKit
 
 class Mirror: SKSpriteNode {
-    
+	func setupPhysics() {
+		physicsBody = SKPhysicsBody(texture: texture, size: size)
+		physicsBody?.affectedByGravity = false
+		physicsBody?.dynamic = false
+		physicsBody?.categoryBitMask = PhysicsType.Mirror.rawValue
+		physicsBody?.contactTestBitMask = PhysicsType.Projectile.rawValue
+	}
 }
