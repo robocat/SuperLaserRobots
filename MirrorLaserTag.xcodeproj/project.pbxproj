@@ -13,6 +13,7 @@
 		8162EF231A8572EA00B230AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8162EF221A8572EA00B230AD /* Images.xcassets */; };
 		8162EF261A8572EA00B230AD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8162EF241A8572EA00B230AD /* MainMenu.xib */; };
 		8162EF321A8572EA00B230AD /* MirrorLaserTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF311A8572EA00B230AD /* MirrorLaserTagTests.swift */; };
+		8162EF3E1A85739E00B230AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF3D1A85739E00B230AD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,12 +31,13 @@
 		8162EF1B1A8572E900B230AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8162EF1C1A8572E900B230AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8162EF1E1A8572EA00B230AD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		8162EF201A8572EA00B230AD /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		8162EF221A8572EA00B230AD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8162EF201A8572EA00B230AD /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameScene.sks; path = MirrorLaserTag/GameScene.sks; sourceTree = "<group>"; };
+		8162EF221A8572EA00B230AD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MirrorLaserTag/Images.xcassets; sourceTree = "<group>"; };
 		8162EF251A8572EA00B230AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8162EF2B1A8572EA00B230AD /* MirrorLaserTagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirrorLaserTagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8162EF301A8572EA00B230AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8162EF311A8572EA00B230AD /* MirrorLaserTagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorLaserTagTests.swift; sourceTree = "<group>"; };
+		8162EF3D1A85739E00B230AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		8162EF0E1A8572E900B230AD = {
 			isa = PBXGroup;
 			children = (
+				8162EF3B1A85736300B230AD /* Resources */,
 				8162EF191A8572E900B230AD /* MirrorLaserTag */,
 				8162EF2E1A8572EA00B230AD /* MirrorLaserTagTests */,
 				8162EF181A8572E900B230AD /* Products */,
@@ -77,11 +80,9 @@
 		8162EF191A8572E900B230AD /* MirrorLaserTag */ = {
 			isa = PBXGroup;
 			children = (
-				8162EF1C1A8572E900B230AD /* AppDelegate.swift */,
+				8162EF3C1A85736C00B230AD /* Game Objects */,
 				8162EF1E1A8572EA00B230AD /* GameScene.swift */,
-				8162EF201A8572EA00B230AD /* GameScene.sks */,
-				8162EF221A8572EA00B230AD /* Images.xcassets */,
-				8162EF241A8572EA00B230AD /* MainMenu.xib */,
+				8162EF3D1A85739E00B230AD /* Extensions.swift */,
 				8162EF1A1A8572E900B230AD /* Supporting Files */,
 			);
 			path = MirrorLaserTag;
@@ -90,6 +91,7 @@
 		8162EF1A1A8572E900B230AD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8162EF1C1A8572E900B230AD /* AppDelegate.swift */,
 				8162EF1B1A8572E900B230AD /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -110,6 +112,23 @@
 				8162EF301A8572EA00B230AD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8162EF3B1A85736300B230AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8162EF201A8572EA00B230AD /* GameScene.sks */,
+				8162EF241A8572EA00B230AD /* MainMenu.xib */,
+				8162EF221A8572EA00B230AD /* Images.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		8162EF3C1A85736C00B230AD /* Game Objects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Game Objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8162EF1F1A8572EA00B230AD /* GameScene.swift in Sources */,
+				8162EF3E1A85739E00B230AD /* Extensions.swift in Sources */,
 				8162EF1D1A8572E900B230AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +262,7 @@
 				8162EF251A8572EA00B230AD /* Base */,
 			);
 			name = MainMenu.xib;
+			path = MirrorLaserTag;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
