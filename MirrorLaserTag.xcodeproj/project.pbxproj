@@ -14,6 +14,10 @@
 		8162EF261A8572EA00B230AD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8162EF241A8572EA00B230AD /* MainMenu.xib */; };
 		8162EF321A8572EA00B230AD /* MirrorLaserTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF311A8572EA00B230AD /* MirrorLaserTagTests.swift */; };
 		8162EF3E1A85739E00B230AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF3D1A85739E00B230AD /* Extensions.swift */; };
+		8162EF401A85750600B230AD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF3F1A85750600B230AD /* Player.swift */; };
+		8162EF421A85752E00B230AD /* Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF411A85752E00B230AD /* Mirror.swift */; };
+		8162EF441A85755300B230AD /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF431A85755300B230AD /* Map.swift */; };
+		8162EF461A8575B300B230AD /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF451A8575B300B230AD /* Controls.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		8162EF301A8572EA00B230AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8162EF311A8572EA00B230AD /* MirrorLaserTagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorLaserTagTests.swift; sourceTree = "<group>"; };
 		8162EF3D1A85739E00B230AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8162EF3F1A85750600B230AD /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		8162EF411A85752E00B230AD /* Mirror.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mirror.swift; sourceTree = "<group>"; };
+		8162EF431A85755300B230AD /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		8162EF451A8575B300B230AD /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,10 @@
 		8162EF3C1A85736C00B230AD /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				8162EF3F1A85750600B230AD /* Player.swift */,
+				8162EF411A85752E00B230AD /* Mirror.swift */,
+				8162EF431A85755300B230AD /* Map.swift */,
+				8162EF451A8575B300B230AD /* Controls.swift */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -232,8 +244,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8162EF401A85750600B230AD /* Player.swift in Sources */,
+				8162EF421A85752E00B230AD /* Mirror.swift in Sources */,
 				8162EF1F1A8572EA00B230AD /* GameScene.swift in Sources */,
+				8162EF461A8575B300B230AD /* Controls.swift in Sources */,
 				8162EF3E1A85739E00B230AD /* Extensions.swift in Sources */,
+				8162EF441A85755300B230AD /* Map.swift in Sources */,
 				8162EF1D1A8572E900B230AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
