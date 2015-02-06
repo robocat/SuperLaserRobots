@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
 	var time : CFTimeInterval = 0
 	
     let player = Player()
@@ -16,6 +16,8 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
 		player.position = CGPoint(x: 100, y: 100)
 		addChild(player)
+		
+        physicsWorld.contactDelegate = self
     }
 	
 	var leftPressed : Bool = false
@@ -50,4 +52,17 @@ class GameScene: SKScene {
 			player.direction -= rotation
 		}
     }
+	
+	// MARK: SKPhysicsContactDelegate
+	
+	func didBeginContact(contact: SKPhysicsContact) {
+		let collision = contact.bodyA.collisionBitMask | contact.bodyB.collisionBitMask
+		switch collision {
+		case PhysicsType.Projectile.rawValue | PhysicsType.Mirror.rawValue:
+			// Change the trajectory and/or velocity of the projectile
+			return
+		default:
+			return
+		}
+	}
 }

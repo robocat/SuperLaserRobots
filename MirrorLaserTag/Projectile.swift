@@ -1,5 +1,5 @@
 //
-//  Mirror.swift
+//  Projectile.swift
 //  MirrorLaserTag
 //
 //  Created by Kristian Andersen on 06/02/15.
@@ -8,12 +8,12 @@
 
 import SpriteKit
 
-class Mirror: SKSpriteNode {
+class Projectile: SKSpriteNode {
 	func setupPhysics() {
 		physicsBody = SKPhysicsBody(texture: texture, size: size)
 		physicsBody?.affectedByGravity = false
-		physicsBody?.dynamic = false
-		physicsBody?.categoryBitMask = PhysicsType.Mirror.rawValue
-		physicsBody?.contactTestBitMask = PhysicsType.Projectile.rawValue
+		physicsBody?.dynamic = true
+		physicsBody?.categoryBitMask = PhysicsType.Projectile.rawValue
+		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue
 	}
 }
