@@ -63,6 +63,7 @@
 			children = (
 				8162EF3B1A85736300B230AD /* Resources */,
 				8162EF191A8572E900B230AD /* MirrorLaserTag */,
+				8162EF1A1A8572E900B230AD /* Supporting Files */,
 				8162EF2E1A8572EA00B230AD /* MirrorLaserTagTests */,
 				8162EF181A8572E900B230AD /* Products */,
 			);
@@ -83,7 +84,6 @@
 				8162EF3C1A85736C00B230AD /* Game Objects */,
 				8162EF1E1A8572EA00B230AD /* GameScene.swift */,
 				8162EF3D1A85739E00B230AD /* Extensions.swift */,
-				8162EF1A1A8572E900B230AD /* Supporting Files */,
 			);
 			path = MirrorLaserTag;
 			sourceTree = "<group>";
@@ -95,6 +95,7 @@
 				8162EF1B1A8572E900B230AD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			path = MirrorLaserTag;
 			sourceTree = "<group>";
 		};
 		8162EF2E1A8572EA00B230AD /* MirrorLaserTagTests */ = {
@@ -422,6 +423,7 @@
 				8162EF371A8572EA00B230AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8162EF381A8572EA00B230AD /* Build configuration list for PBXNativeTarget "MirrorLaserTagTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +432,7 @@
 				8162EF3A1A8572EA00B230AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
