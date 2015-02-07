@@ -250,9 +250,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
 					
 					// This is fucked now
-//					fire.position = convertPoint(contact.contactPoint, toNode: map)
+					//fire.position = convertPoint(contact.contactPoint, toNode: map)
 					
-					fire.position = player.position
+					let offset = CGPoint(x: size.width / 2, y: size.height / 2)
+					fire.position = contact.contactPoint - offset
+					//fire.zPosition = 100
 					map.addChild(fire)
 					
 					let scale = SKAction.scaleBy(3, duration: 0.2)
