@@ -12,6 +12,7 @@ struct ObstaclePosition {
 	let type: ObstacleType
 	let position: CGPoint
 	let angle: CGFloat
+	let size: CGSize
 }
 
 struct Level {
@@ -21,7 +22,16 @@ struct Level {
 		get {
 			return [
 				Level(obstacles: [
-					ObstaclePosition(type: .Plant, position: CGPoint(x: 0, y: 0), angle: 0)
+					// Destructables
+					ObstaclePosition(type: .Plant,
+						position: CGPoint(x: 0, y: 0),
+						angle: 0,
+						size: CGSize(width: 52, height: 58)),
+					// Walls
+					ObstaclePosition(type: .Wall,
+						position: CGPoint(x: -400, y: -400),
+						angle: 0,
+						size: CGSize(width: 10, height: 400))
 				])
 			]
 		}

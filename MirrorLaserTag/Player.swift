@@ -10,6 +10,13 @@ import SpriteKit
 
 class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
+
+	var controls: Controls!
+
+	var shouldTurnLeft: Bool = false
+	var shouldTurnRight: Bool = false
+	var shouldMoveFoward: Bool = false
+	
 	var health : Int = 100
 	
 	override init() {
@@ -24,5 +31,53 @@ class Player : SKSpriteNode {
 	
 	func updateDirection() {
 		zRotation = direction
+	}
+	
+	func update(timePassed: CFTimeInterval) {
+		var rotationsPerSecond: CGFloat = 1.2
+		var rotation = (π * 2) * rotationsPerSecond * CGFloat(timePassed)
+
+		if shouldTurnLeft {
+			direction += rotation
+		} else if shouldTurnRight {
+			direction -= rotation
+		}
+		
+		if shouldMoveFoward {
+			var pixelsPerSecond: CGFloat = 500
+			let vector = CGVector(dx: sin(-direction), dy: cos(direction)) * pixelsPerSecond * CGFloat(timePassed)
+			
+			runAction(SKAction.moveBy(vector, duration: 0))
+		}
+	}
+	
+	func performCommand(command: Command) {
+		switch command {
+		case .TurnLeft: shouldTurnLeft = true
+		case .TurnRight: shouldTurnRight = true
+		case .Forward: shouldMoveFoward = true
+		case _: break
+		}
+	}
+	
+	func handleKeyDown(keyCode: UInt16) {
+		if let key = Controls.Key(rawValue: Int(keyCode)) {
+			if let command = controls.mappings[key] {
+				performCommand(command)
+			}
+		}
+	}
+	
+	func handleKeyUp(keyCode: UInt16) {
+		if let key = Controls.Key(rawValue: Int(keyCode)) {
+			if let command = controls.mappings[key] {
+				switch command {
+				case .TurnLeft: shouldTurnLeft = false
+				case .TurnRight: shouldTurnRight = false
+				case .Forward: shouldMoveFoward = false
+				case _: break
+				}
+			}
+		}
 	}
 }

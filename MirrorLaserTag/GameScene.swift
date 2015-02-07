@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
 	var time : CFTimeInterval = 0
 	
-    let player = Player()
+	var players: [Player] = []
 	var map: Map!
 	
 	// MARK: Set Up
@@ -25,8 +25,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 	
 	func setupPlayers() {
-//		player.position = CGPoint(x: 100, y: 100)
-//		addChild(player)
+		let player1 = Player()
+		player1.controls = Controls(player: player1, mappings: Controls.mappings[0])
+		player1.position = CGPoint(x: 100, y: 100)
+		players.append(player1)
+		
+		let player2 = Player()
+		player2.controls = Controls(player: player2, mappings: Controls.mappings[1])
+		player2.position = CGPoint(x: 300, y: 300)
+		players.append(player2)
 	}
 	
 	func setupUI() {
@@ -49,33 +56,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	
 	func setupMap() {
 		let levels = Level.all
-		map = Map(players: [player], level: levels[0], size: size)
+		map = Map(players: players, level: levels[0], size: size)
 		map.position = CGPoint(x: size.width / 2, y: size.height / 2)
 		
 		addChild(map)
 	}
 	
 	// MARK: Update Loop
-	
-	var leftPressed : Bool = false
-	var rightPressed : Bool = false
-	var upPressed : Bool = false
-    
+
     override func keyDown(theEvent: NSEvent) {
-		switch theEvent.key {
-		case .Some(.Left): leftPressed = true
-		case .Some(.Right): rightPressed = true
-		case .Some(.Up): upPressed = true
-		case _: break
+		for player in players {
+			player.handleKeyDown(theEvent.keyCode)
 		}
-    }
+	}
 	
 	override func keyUp(theEvent: NSEvent) {
-		switch theEvent.key {
-		case .Some(.Left): leftPressed = false
-		case .Some(.Right): rightPressed = false
-		case .Some(.Up): upPressed = false
-		case _: break
+		for player in players {
+			player.handleKeyUp(theEvent.keyCode)
 		}
 	}
     
@@ -83,20 +80,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		var elapsedTime = currentTime - time
 		time = currentTime
 		
-		var rotationsPerSecond = 0.5
-		var pixelsPerSecond : CGFloat = 500
-		
-		var rotation = (π * 2) * CGFloat(rotationsPerSecond) * CGFloat(elapsedTime)
-		
-		if leftPressed {
-			player.direction += rotation
-		} else if rightPressed {
-			player.direction -= rotation
-		}
-		
-		if upPressed {
-			let vector = CGVector(dx: sin(-player.direction), dy: cos(player.direction)) * pixelsPerSecond * CGFloat(elapsedTime)
-			player.runAction(SKAction.moveBy(vector, duration: 0))
+		for player in players {
+			player.update(elapsedTime)
 		}
     }
 	

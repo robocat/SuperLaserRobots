@@ -10,6 +10,7 @@ import SpriteKit
 
 enum ObstacleType: String {
 	case Plant = "plant"
+	case Wall = "wall"
 }
 
 class Obstacle : SKSpriteNode {
