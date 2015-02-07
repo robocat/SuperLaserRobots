@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+@objc protocol PlayerDelegate {
+	func playerDidChangeHealth(player : Player)
+}
+
 class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
 
@@ -17,10 +21,12 @@ class Player : SKSpriteNode {
 	var shouldTurnRight: Bool = false
 	var shouldMoveFoward: Bool = false
 	
-	var health : Int = 100
+	var health : Int = 100 { didSet { delegate?.playerDidChangeHealth(self) } }
     var lastShot : CFTimeInterval
 	var playerName : String
+	var dead = false
 
+	weak var delegate : PlayerDelegate?
 	weak var map : Map?
 	
 	override init() {
@@ -63,18 +69,20 @@ class Player : SKSpriteNode {
 		
 		var rotation = (π * 2) * CGFloat(rotationsPerSecond) * CGFloat(timePassed)
 		
-		if shouldTurnLeft {
-			//player.direction += rotation
-			physicsBody?.applyAngularImpulse(rotation)
-		} else if shouldTurnRight {
-			//player.direction -= rotation
-			physicsBody?.applyAngularImpulse(-rotation)
-		}
-		
-		if shouldMoveFoward {
-			let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
-			//player.runAction(SKAction.moveBy(vector, duration: 0))
-			physicsBody?.applyForce(vector)
+		if !dead {
+			if shouldTurnLeft {
+				//player.direction += rotation
+				physicsBody?.applyAngularImpulse(rotation)
+			} else if shouldTurnRight {
+				//player.direction -= rotation
+				physicsBody?.applyAngularImpulse(-rotation)
+			}
+			
+			if shouldMoveFoward {
+				let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
+				//player.runAction(SKAction.moveBy(vector, duration: 0))
+				physicsBody?.applyForce(vector)
+			}
 		}
 	}
 	
