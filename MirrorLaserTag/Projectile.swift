@@ -36,7 +36,7 @@ class Projectile: SKSpriteNode {
 		//physicsBody?.restitution = 1.0
 		//physicsBody?.allowsRotation = true
         
-        let v = CGVector(dx: 500.0 * -cos(self.zRotation), dy: -500.0 * sin(self.zRotation))
+        let v = CGVector(dx: 800.0 * -cos(self.zRotation), dy: -800.0 * sin(self.zRotation))
         physicsBody?.velocity = v
 	}
 }
