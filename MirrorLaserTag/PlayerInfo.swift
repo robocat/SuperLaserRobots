@@ -24,21 +24,33 @@ class PlayerInfo : SKNode {
 	
 	var image = SKSpriteNode(imageNamed: "avatar1")
 	var healthBar = HealthBar()
+	var killCount = SKLabelNode(text: "0")
 	
 	var size : CGSize = CGSize(width: 350, height: 70)
+	
+	var numberOfKills : Int = 0 { didSet { killCount.text = "\(numberOfKills)" } }
 	
 	func setup() {
 		addChild(healthBar)
 		addChild(image)
+		addChild(killCount)
+		
+		killCount.fontName = "Helvetica"
+		killCount.fontColor = .blackColor()
+		killCount.fontSize = 60
 		
 		if leftMode {
 			healthBar.position = CGPoint(x: 80, y: 0)
 			image.position = CGPoint(x: 40, y: 0)
 			image.size = CGSize(width: 60, height: 60)
+			killCount.position = CGPoint(x: 380, y: -20)
+			killCount.horizontalAlignmentMode = .Left
 		} else {
 			healthBar.position = CGPoint(x: 0, y: 0)
 			image.position = CGPoint(x: 310, y: 0)
 			image.size = CGSize(width: 60, height: 60)
+			killCount.position = CGPoint(x: -30, y: -20)
+			killCount.horizontalAlignmentMode = .Right
 		}
 	}
 }

@@ -58,24 +58,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player1.controls = Controls(player: player1, mappings: Controls.mappings[0])
 		player1.position = CGPoint(x: -370, y: -320)
 		player1.zRotation = -π / 4
+		player1.playerColor = "green"
 		players.append(player1)
 		
 		let player2 = Player()
 		player2.controls = Controls(player: player2, mappings: Controls.mappings[1])
 		player2.position = CGPoint(x: -370, y: 320)
 		player2.zRotation = -π * 0.75
+		player2.playerColor = "blue"
 		players.append(player2)
 		
 		let player3 = Player()
 		player3.controls = Controls(player: player3, mappings: Controls.mappings[2])
 		player3.position = CGPoint(x: 370, y: -320)
 		player3.zRotation = π / 4
+		player3.playerColor = "purple"
 		players.append(player3)
 		
 		let player4 = Player()
 		player4.controls = Controls(player: player4, mappings: Controls.mappings[3])
 		player4.position = CGPoint(x: 370, y: 320)
 		player4.zRotation = π * 0.75
+		player4.playerColor = "red"
 		players.append(player4)
 
 		for player in players {

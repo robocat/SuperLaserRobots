@@ -21,21 +21,37 @@ class Player : SKSpriteNode {
 	var shouldTurnRight: Bool = false
 	var shouldMoveFoward: Bool = false
 	
-	var health : Int = 100 { didSet { delegate?.playerDidChangeHealth(self) } }
+	var health : Int = 100 {
+		didSet {
+			delegate?.playerDidChangeHealth(self)
+			
+			if health < 30 {
+				startFlash()
+			} else {
+				stopFlash()
+			}
+		}
+	}
+	
 	var lastShot : CFTimeInterval
 	var playerName : String
 	var dead = false
+	var playerColor : String = "green" { didSet { texture = SKTexture(imageNamed: "\(playerColor)1") } }
 	
 	weak var delegate : PlayerDelegate?
 	weak var map : Map?
 	
 	override init() {
-		let texture = SKTexture(imageNamed: "Spaceship")
 		lastShot = 0
 		playerName = "Anonymous"
-		super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
+		super.init(texture: nil, color: nil, size: CGSize(width: 96, height: 96))
 		direction = 0
 		setupPhysics()
+		
+		let heal = SKAction.runBlock { if !self.dead { self.health = min(self.health + 1, 100) } }
+		let wait = SKAction.waitForDuration(3)
+		let sequence = SKAction.sequence([heal, wait])
+		runAction(SKAction.repeatActionForever(sequence))
 	}
 	
 	convenience init(playerName name : String, currentTime time : CFTimeInterval) {
@@ -50,6 +66,32 @@ class Player : SKSpriteNode {
 	
 	func updateDirection() {
 		zRotation = direction
+	}
+	
+	enum State : Printable {
+		case Stand
+		case Walk
+		case Shoot
+		
+		var description : String {
+			switch self {
+			case .Stand: return "Stand"
+			case .Walk: return "Walk"
+			case .Shoot: return "Shoot"
+			}
+		}
+	}
+	
+	var moving = false
+	var state = State.Stand
+	
+	func playAnimation(state : State, frames : [SKTexture]) {
+		if self.state != state {
+			self.state = state
+			let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.1)
+			let action = SKAction.repeatActionForever(animation)
+			runAction(action)
+		}
 	}
 	
 	func setupPhysics() {
@@ -71,15 +113,32 @@ class Player : SKSpriteNode {
 		var rotation = (π * 2) * CGFloat(rotationsPerSecond) * CGFloat(timePassed)
 		
 		if !dead {
+			moving = false
+			
 			if shouldTurnLeft {
 				physicsBody?.applyAngularImpulse(rotation)
+				moving = true
 			} else if shouldTurnRight {
 				physicsBody?.applyAngularImpulse(-rotation)
+				moving = true
 			}
 			if shouldMoveFoward {
 				let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
-				//player.runAction(SKAction.moveBy(vector, duration: 0))
 				physicsBody?.applyImpulse(vector)
+				moving = true
+			}
+			
+			updateMoving()
+		}
+	}
+	
+	func updateMoving() {
+		if state != .Shoot {
+			if moving {
+				let frames = ["\(playerColor)1", "\(playerColor)2"].map { SKTexture(imageNamed: $0)! }
+				playAnimation(.Walk, frames: frames)
+			} else {
+				playAnimation(.Stand, frames: [SKTexture(imageNamed: "\(playerColor)1")!])
 			}
 		}
 	}
@@ -109,35 +168,60 @@ class Player : SKSpriteNode {
 				case .TurnRight: shouldTurnRight = false
 				case .Forward: shouldMoveFoward = false
 				case .Fire:
-					//if (time - lastShot > 0.2) {
-					//	lastShot = time
-					let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 2
-					for i in -bulletCount...bulletCount
-					{
-						let pSize = size
-						// put it back inside the trigonometric calls to fan out bullets
-						// + CGFloat(i) / 10.0
-//						let offset = CGPoint(x: pSize.width * sin(-(zRotation + CGFloat(i) / 10.0)), y: pSize.height * cos(zRotation + CGFloat(i) / 10.0))
-//						let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 10))
-//						let remover = SKAction.sequence([SKAction.waitForDuration(1 + Double(random() as CGFloat)), SKAction.removeFromParent()])
-//						projectile.runAction(remover)
-
-						let offset = CGPoint(x: pSize.width * sin(-zRotation) + CGFloat(i) / 3.0, y: pSize.height * cos(zRotation) + CGFloat(i) / 3.0)
-						let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 3))
+					if !dead {
+						state = .Shoot
+						let frames = [SKTexture(imageNamed: "\(playerColor)shoot")!]
+						let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.2)
+						let end = SKAction.runBlock { self.state = .Stand; self.updateMoving() }
+						let sequence = SKAction.sequence([animation, end])
+						runAction(sequence)
 						
-						let remover = SKAction.sequence([SKAction.waitForDuration(2), SKAction.removeFromParent()])
-						let sound = SKAction.playSoundFileNamed(randomFireSound(), waitForCompletion: false)
-						let grouped = SKAction.group([sound, remover])
-						
-						projectile.runAction(grouped)
-						map?.addChild(projectile)
+						let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 2
+						for i in -bulletCount...bulletCount
+						{
+							let pSize = size
+							// put it back inside the trigonometric calls to fan out bullets
+							// + CGFloat(i) / 10.0
+							//						let offset = CGPoint(x: pSize.width * sin(-(zRotation + CGFloat(i) / 10.0)), y: pSize.height * cos(zRotation + CGFloat(i) / 10.0))
+							//						let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 10))
+							//						let remover = SKAction.sequence([SKAction.waitForDuration(1 + Double(random() as CGFloat)), SKAction.removeFromParent()])
+							//						projectile.runAction(remover)
+							
+							let offset = CGPoint(x: pSize.width * sin(-zRotation) + CGFloat(i) / 3.0, y: pSize.height * cos(zRotation) + CGFloat(i) / 3.0)
+							let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 3), color: playerColor)
+							
+							let remover = SKAction.sequence([SKAction.waitForDuration(2), SKAction.removeFromParent()])
+							let sound = SKAction.playSoundFileNamed(randomFireSound(), waitForCompletion: false)
+							let grouped = SKAction.group([sound, remover])
+							
+							projectile.runAction(grouped)
+							map?.addChild(projectile)
+						}
 					}
-					//}
 					if (false) {}
 				case _: break
 				}
 			}
 		}
+	}
+	
+	var flash : SKSpriteNode?
+	
+	func startFlash() {
+		if flash == nil {
+			flash = SKSpriteNode(texture: SKTexture(imageNamed: "flash"))
+			flash?.xScale = 2
+			flash?.yScale = 2
+			let rotate = SKAction.rotateByAngle(π * 2, duration: 1)
+			let action = SKAction.repeatActionForever(rotate)
+			flash?.runAction(action)
+			addChild(flash!)
+		}
+	}
+	
+	func stopFlash() {
+		flash?.removeFromParent()
+		flash = nil
 	}
 	
 	func randomFireSound() -> String {
