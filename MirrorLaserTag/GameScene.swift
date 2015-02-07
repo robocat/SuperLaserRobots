@@ -27,13 +27,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	func setupPlayers() {
 		let player1 = Player()
 		player1.controls = Controls(player: player1, mappings: Controls.mappings[0])
-		player1.position = CGPoint(x: 100, y: 100)
+		player1.position = CGPoint(x: -500, y: -200)
+		player1.zRotation = -π / 4
 		players.append(player1)
 		
 		let player2 = Player()
 		player2.controls = Controls(player: player2, mappings: Controls.mappings[1])
-		player2.position = CGPoint(x: 300, y: 300)
+		player2.position = CGPoint(x: -500, y: 200)
+		player2.zRotation = -π * 0.75
 		players.append(player2)
+		
+		let player3 = Player()
+		player3.controls = Controls(player: player3, mappings: Controls.mappings[2])
+		player3.position = CGPoint(x: 500, y: -200)
+		player3.zRotation = π / 4
+		players.append(player3)
+		
+		let player4 = Player()
+		player4.controls = Controls(player: player4, mappings: Controls.mappings[3])
+		player4.position = CGPoint(x: 500, y: 200)
+		player4.zRotation = π * 0.75
+		players.append(player4)
 	}
 	
 	func setupUI() {
@@ -69,6 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	// MARK: Update Loop
 
     override func keyDown(theEvent: NSEvent) {
+		println(theEvent.keyCode)
 		for player in players {
 			player.handleKeyDown(theEvent.keyCode)
 		}

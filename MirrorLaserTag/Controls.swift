@@ -20,23 +20,33 @@ struct Controls {
 	let mappings: [Key: Command]
 	
 	enum Key : Int {
-		case Up = 126
-		case Down = 125
-		case Right = 124
-		case Left = 123
-		case Backspace = 51
-		
+		// Player 1
 		case A = 0
 		case W = 13
 		case D = 2
 		case S = 1
 		case Tab = 48
 		
+		// Player 2
+		case Up = 126
+		case Down = 125
+		case Right = 124
+		case Left = 123
+		case Backspace = 51
+		
+		// Player 3
 		case G = 5
 		case Y = 16
 		case J = 38
 		case H = 4
 		case Space = 49
+		
+		// Player 4
+		case P = 35
+		case L = 37
+		case Colon = 41
+		case Comma = 39
+		case Plus = 24
 	}
 	
 	static var mappings: [[Key: Command]] {
@@ -59,6 +69,12 @@ struct Controls {
 					.J: 			.TurnRight,
 					.Y: 			.Forward,
 					.Space: 		.Fire
+				],
+				[
+					.L:				.TurnLeft,
+					.Comma:			.TurnRight,
+					.P:				.Forward,
+					.Plus:			.Fire
 				]
 			]
 		}
