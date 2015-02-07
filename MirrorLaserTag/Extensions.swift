@@ -128,6 +128,12 @@ func *(left: CGPoint, factor: CGFloat) -> CGPoint {
 	return left / (1/factor)
 }
 
+func random() -> CGFloat {
+	let max : UInt32 = 10000
+	let r = arc4random_uniform(max)
+	return CGFloat(r) / CGFloat(max)
+}
+
 extension SKNode {
 	class func unarchiveFromFile(file : NSString) -> SKNode? {
 		if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {

@@ -86,8 +86,8 @@ class Player : SKSpriteNode {
 		physicsBody?.linearDamping = 10.0
 		physicsBody?.angularDamping = 20.0
 		physicsBody?.categoryBitMask = PhysicsType.Player.rawValue
-		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue
-		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue
+		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue | PhysicsType.Obstacle.rawValue
+		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue | PhysicsType.Obstacle.rawValue
 	}
 	
 	func update(timePassed: CFTimeInterval) {
@@ -106,7 +106,6 @@ class Player : SKSpriteNode {
 				physicsBody?.applyAngularImpulse(-rotation)
 				moving = true
 			}
-			
 			if shouldMoveFoward {
 				let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
 				physicsBody?.applyImpulse(vector)
@@ -162,9 +161,17 @@ class Player : SKSpriteNode {
 					
 					//if (time - lastShot > 0.2) {
 					//	lastShot = time
-					for i in -5...5
+					let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 2
+					for i in -bulletCount...bulletCount
 					{
 						let pSize = size
+						// put it back inside the trigonometric calls to fan out bullets
+						// + CGFloat(i) / 10.0
+//						let offset = CGPoint(x: pSize.width * sin(-(zRotation + CGFloat(i) / 10.0)), y: pSize.height * cos(zRotation + CGFloat(i) / 10.0))
+//						let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 10))
+//						let remover = SKAction.sequence([SKAction.waitForDuration(1 + Double(random() as CGFloat)), SKAction.removeFromParent()])
+//						projectile.runAction(remover)
+
 						let offset = CGPoint(x: pSize.width * sin(-zRotation) + CGFloat(i) / 3.0, y: pSize.height * cos(zRotation) + CGFloat(i) / 3.0)
 						let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 3))
 						

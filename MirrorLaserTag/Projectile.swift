@@ -31,9 +31,10 @@ class Projectile: SKSpriteNode {
 		physicsBody?.affectedByGravity = false
 		physicsBody?.dynamic = true
 		physicsBody?.categoryBitMask = PhysicsType.Projectile.rawValue
-		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue
-		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue
+		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Obstacle.rawValue
+		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Obstacle.rawValue
 		//physicsBody?.restitution = 1.0
+		//physicsBody?.mass = 0.1
 		//physicsBody?.allowsRotation = true
         
         let v = CGVector(dx: 800.0 * -cos(self.zRotation), dy: -800.0 * sin(self.zRotation))
