@@ -19,6 +19,16 @@ extension NSEvent {
         case Right = 124
         case Left = 123
         case Space = 49
+		case A = 0
+		case W = 1
+		case D = 2
+		case S = 3
+		case LShift = 4
+		case RShift = 5
+		case G = 6
+		case Y = 7
+		case J = 8
+		case H = 9
     }
     
     var key : Key? {
@@ -71,6 +81,35 @@ extension Int {
     static func random(range: Range<UInt32>) -> UInt32 {
         return range.startIndex + arc4random_uniform(range.endIndex - range.startIndex + 1)
     }
+}
+
+extension Array {
+	
+	// Stack - LIFO
+	mutating func push(newElement: T) {
+		self.append(newElement)
+	}
+	
+	mutating func pop() -> T? {
+		return self.removeLast()
+	}
+	
+	func peekAtStack() -> T? {
+		return self.last
+	}
+	
+	// Queue - FIFO
+	mutating func enqueue(newElement: T) {
+		self.append(newElement)
+	}
+	
+	mutating func dequeue() -> T? {
+		return self.removeAtIndex(0)
+	}
+	
+	func peekAtQueue() -> T? {
+		return self.first
+	}
 }
 
 func *(vector : CGVector, value : CGFloat) -> CGVector {

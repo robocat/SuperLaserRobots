@@ -10,7 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 	var time : CFTimeInterval = 0
-    let player = Player()
+	var players: [Player] = []
 	var map: Map!
 	
 	// MARK: Set Up
@@ -25,8 +25,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 	
 	func setupPlayers() {
-//		player.position = CGPoint(x: 100, y: 100)
-//		addChild(player)
+		let player1 = Player()
+		player1.controls = Controls(player: player1, mappings: Controls.mappings[0])
+		player1.position = CGPoint(x: 100, y: 100)
+		players.append(player1)
+		
+		let player2 = Player()
+		player2.controls = Controls(player: player2, mappings: Controls.mappings[1])
+		player2.position = CGPoint(x: 300, y: 300)
+		players.append(player2)
 	}
 	
 	func setupUI() {
@@ -49,36 +56,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	
 	func setupMap() {
 		let levels = Level.all
-		map = Map(players: [player], level: levels[0], size: CGSize(width: 600, height: 400))
+		map = Map(players: players, level: levels[0], size: size)
 		map.position = CGPoint(x: size.width / 2, y: size.height / 2)
 		
 		addChild(map)
+		
+		for player in players {
+			player.map = map
+		}
 	}
 	
 	// MARK: Update Loop
-	
-	var leftPressed : Bool = false
-	var rightPressed : Bool = false
-	var upPressed : Bool = false
-    
+
     override func keyDown(theEvent: NSEvent) {
-		switch theEvent.key {
-		case .Some(.Left): leftPressed = true
-		case .Some(.Right): rightPressed = true
-		case .Some(.Up): upPressed = true
-		//case .Some(.Up):
-		//	removeChildrenInArray(self.children.filter({$0 is Projectile}))
-        case .Some(.Space):
-            if (time - player.lastShot > 0.2) {
-                player.lastShot = time
-				let pSize = player.size
-				let offset = CGPoint(x: pSize.width * -sin(player.zRotation), y: pSize.height * cos(player.zRotation))
-				let projectile = Projectile(position: player.position + offset, angle: player.zRotation)
-                map.addChild(projectile)
-            }
-		case _: break
+		for player in players {
+			player.handleKeyDown(theEvent.keyCode)
 		}
-    }
+	}
 	
 	override func mouseDown(theEvent: NSEvent) {
 		let location = theEvent.locationInNode(self)
@@ -90,35 +84,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
 	override func keyUp(theEvent: NSEvent) {
-		switch theEvent.key {
-		case .Some(.Left): leftPressed = false
-		case .Some(.Right): rightPressed = false
-		case .Some(.Up): upPressed = false
-		case _: break
+		for player in players {
+			player.handleKeyUp(theEvent.keyCode)
 		}
 	}
     
     override func update(currentTime: CFTimeInterval) {
 		var elapsedTime = currentTime - time
 		time = currentTime
-		
-		var rotationsPerSecond = 0.2
-		var pixelsPerSecond : CGFloat = 5000
-		
-		var rotation = (π * 2) * CGFloat(rotationsPerSecond) * CGFloat(elapsedTime)
-		
-		if leftPressed {
-			//player.direction += rotation
-			player.physicsBody?.applyAngularImpulse(rotation)
-		} else if rightPressed {
-			//player.direction -= rotation
-			player.physicsBody?.applyAngularImpulse(-rotation)
-		}
-		
-		if upPressed {
-			let vector = CGVector(dx: sin(-player.zRotation), dy: cos(player.zRotation)) * pixelsPerSecond * CGFloat(elapsedTime)
-			//player.runAction(SKAction.moveBy(vector, duration: 0))
-			player.physicsBody?.applyForce(vector)
+
+		for player in players {
+			player.update(elapsedTime)
 		}
     }
 	
