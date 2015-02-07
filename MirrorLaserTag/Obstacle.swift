@@ -30,10 +30,19 @@ class Obstacle : SKSpriteNode {
 	}
 	
 	func setupPhysics() {
-		physicsBody = SKPhysicsBody(texture: texture, size: size)
+		physicsBody = SKPhysicsBody(rectangleOfSize: size)
 		physicsBody?.affectedByGravity = false
 		physicsBody?.dynamic = false
 		physicsBody?.categoryBitMask = PhysicsType.Obstacle.rawValue
+		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue | PhysicsType.Obstacle.rawValue
+		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue | PhysicsType.Obstacle.rawValue
+		
+	}
+	
+	override var size : CGSize {
+		didSet {
+			setupPhysics()
+		}
 	}
 }
 

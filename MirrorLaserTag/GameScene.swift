@@ -136,24 +136,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	func didBeginContact(contact: SKPhysicsContact) {
 		let normal = contact.contactNormal
 		let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+		if (contact.bodyB.categoryBitMask == PhysicsType.Projectile.rawValue && contact.bodyA.categoryBitMask != PhysicsType.Player.rawValue) {
+			if let node = contact.bodyB.node {
+				//node.zRotation -= π/4
+				
+				node.removeFromParent()
+			}
+		}
 		switch collision {
 		case PhysicsType.Projectile.rawValue | PhysicsType.Mirror.rawValue:
 			// Change the trajectory and/or velocity of the projectile
-			let angle = asin(min(normal.dx, normal.dy)/max(normal.dx, normal.dy))
-			if let projectile = contact.bodyA.node as? Projectile {
-				projectile.zRotation += 0.3
-			} else {
-				//let projectile = contact.bodyB.node as Projectile
-				//let v = contact.bodyB.velocity
-				//let newV = CGVector(dx: v.dx * cos(angle), dy: v.dy * sin(angle))
-				//contact.bodyB.velocity = newV
-				
-				//projectile.zRotation += 0.3
+			if let node = contact.bodyB.node {
+			}
+			return
+		case PhysicsType.Projectile.rawValue | PhysicsType.Obstacle.rawValue:
+			if let node = contact.bodyB.node {
+				//node.removeFromParent()
+				//let newLaser = Projectile(position: convertPoint(node.position, fromNode: map), angle: node.zRotation + π)
+				//map.addChild(newLaser)
+				//node.removeFromParent()
 			}
 			return
 		case PhysicsType.Projectile.rawValue | PhysicsType.Player.rawValue:
 			if let node = contact.bodyB.node {
-				map.removeChildrenInArray([node])
+				if contact.bodyB.categoryBitMask == PhysicsType.Projectile.rawValue {
+					map.removeChildrenInArray([node])
+				}
 				if let player = contact.bodyA.node as? Player {
 					player.health -= 1
 					
@@ -181,6 +189,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		
 		if player.health <= 0 {
 			player.dead = true
+			player.hidden = true
+			let physics = player.physicsBody
+			player.physicsBody = nil
+			player.runAction(SKAction.sequence([SKAction.waitForDuration(3), SKAction.runBlock({
+				if player.health > 0 { return }
+				//player.physicsBody = physics
+				player.setupPhysics()
+				player.hidden = false
+				player.health = 100
+				player.dead = false
+			})]))
 		}
 	}
 }
