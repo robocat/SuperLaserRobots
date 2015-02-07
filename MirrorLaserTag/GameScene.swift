@@ -279,15 +279,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 			player.score += 1
 			player.dead = true
 			player.hidden = true
-			let physics = player.physicsBody
 			player.physicsBody = nil
-			player.runAction(SKAction.sequence([SKAction.waitForDuration(3), SKAction.runBlock({
+			let sound = SKAction.playSoundFileNamed("Dead.wav", waitForCompletion: false)
+			player.runAction(SKAction.sequence([sound, SKAction.waitForDuration(3), SKAction.runBlock({ [weak self] in
 				if player.health > 0 { return }
-				//player.physicsBody = physics
 				player.setupPhysics()
 				player.hidden = false
 				player.health = 100
 				player.dead = false
+				let sound = SKAction.playSoundFileNamed("Respawn.wav", waitForCompletion: false)
+				self?.runAction(sound)
 			})]))
 		}
 	}
