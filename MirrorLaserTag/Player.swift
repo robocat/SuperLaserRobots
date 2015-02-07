@@ -14,18 +14,18 @@ import SpriteKit
 
 class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
-
+	
 	var controls: Controls!
-
+	
 	var shouldTurnLeft: Bool = false
 	var shouldTurnRight: Bool = false
 	var shouldMoveFoward: Bool = false
 	
 	var health : Int = 100 { didSet { delegate?.playerDidChangeHealth(self) } }
-    var lastShot : CFTimeInterval
+	var lastShot : CFTimeInterval
 	var playerName : String
 	var dead = false
-
+	
 	weak var delegate : PlayerDelegate?
 	weak var map : Map?
 	
@@ -33,16 +33,16 @@ class Player : SKSpriteNode {
 		let texture = SKTexture(imageNamed: "Spaceship")
 		lastShot = 0
 		playerName = "Anonymous"
-        super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
+		super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
 		direction = 0
 		setupPhysics()
 	}
-    
+	
 	convenience init(playerName name : String, currentTime time : CFTimeInterval) {
-        self.init()
-        self.lastShot = time
+		self.init()
+		self.lastShot = time
 		playerName = name
-    }
+	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -53,19 +53,21 @@ class Player : SKSpriteNode {
 	}
 	
 	func setupPhysics() {
-		physicsBody = SKPhysicsBody(texture: texture, size: size)
+		physicsBody = SKPhysicsBody(rectangleOfSize: size)
+		//physicsBody = SKPhysicsBody(texture: texture, size: size)
 		physicsBody?.affectedByGravity = false
 		physicsBody?.dynamic = true
-		physicsBody?.angularDamping = 8.0
+		physicsBody?.linearDamping = 10.0
+		physicsBody?.angularDamping = 20.0
 		physicsBody?.categoryBitMask = PhysicsType.Player.rawValue
 		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue
 		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue
 	}
-
+	
 	
 	func update(timePassed: CFTimeInterval) {
-		var rotationsPerSecond = 0.2
-		var pixelsPerSecond : CGFloat = 5000
+		var rotationsPerSecond = 0.3
+		var pixelsPerSecond : CGFloat = 1000
 		
 		var rotation = (π * 2) * CGFloat(rotationsPerSecond) * CGFloat(timePassed)
 		
@@ -81,7 +83,7 @@ class Player : SKSpriteNode {
 			if shouldMoveFoward {
 				let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
 				//player.runAction(SKAction.moveBy(vector, duration: 0))
-				physicsBody?.applyForce(vector)
+				physicsBody?.applyImpulse(vector)
 			}
 		}
 	}
@@ -113,10 +115,15 @@ class Player : SKSpriteNode {
 				case .Fire:
 					//if (time - lastShot > 0.2) {
 					//	lastShot = time
+					for i in -5...5
+					{
 						let pSize = size
-						let offset = CGPoint(x: pSize.width * -sin(zRotation), y: pSize.height * cos(zRotation))
-						let projectile = Projectile(position: position + offset, angle: zRotation)
+						let offset = CGPoint(x: pSize.width * sin(-zRotation) + CGFloat(i) / 3.0, y: pSize.height * cos(zRotation) + CGFloat(i) / 3.0)
+						let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 3))
+						let remover = SKAction.sequence([SKAction.waitForDuration(2), SKAction.removeFromParent()])
+						projectile.runAction(remover)
 						map?.addChild(projectile)
+					}
 					//}
 					if (false) {}
 				case _: break
