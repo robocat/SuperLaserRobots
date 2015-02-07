@@ -37,6 +37,8 @@ class Player : SKSpriteNode {
 	var playerName : String
 	var dead = false
 	var playerColor : String = "green" { didSet { texture = SKTexture(imageNamed: "\(playerColor)1") } }
+	var score = 0
+	//var lastReceivedDamageFrom : Player? = nil
 	
 	weak var delegate : PlayerDelegate?
 	weak var map : Map?
@@ -96,6 +98,8 @@ class Player : SKSpriteNode {
 	
 	func setupPhysics() {
 		physicsBody = SKPhysicsBody(rectangleOfSize: size)
+		//let newSize = sqrt(pow(size.height, 2) + pow(size.width, 2)) / 3
+		//physicsBody = SKPhysicsBody(circleOfRadius: newSize)
 		//physicsBody = SKPhysicsBody(texture: texture, size: size)
 		physicsBody?.affectedByGravity = false
 		physicsBody?.dynamic = true
