@@ -21,7 +21,18 @@ class Player : SKSpriteNode {
 	var shouldTurnRight: Bool = false
 	var shouldMoveFoward: Bool = false
 	
-	var health : Int = 100 { didSet { delegate?.playerDidChangeHealth(self) } }
+	var health : Int = 100 {
+		didSet {
+			delegate?.playerDidChangeHealth(self)
+			
+			if health < 30 {
+				startFlash()
+			} else {
+				stopFlash()
+			}
+		}
+	}
+	
 	var lastShot : CFTimeInterval
 	var playerName : String
 	var dead = false
@@ -36,6 +47,11 @@ class Player : SKSpriteNode {
 		super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
 		direction = 0
 		setupPhysics()
+		
+		let heal = SKAction.runBlock { self.health = min(self.health + 1, 100) }
+		let wait = SKAction.waitForDuration(1)
+		let sequence = SKAction.sequence([heal, wait])
+		runAction(SKAction.repeatActionForever(sequence))
 	}
 	
 	convenience init(playerName name : String, currentTime time : CFTimeInterval) {
@@ -119,7 +135,7 @@ class Player : SKSpriteNode {
 	func updateMoving() {
 		if state != .Shoot {
 			if moving {
-				let frames = ["greenrobot1", "greenrobot2", "greenrobot3"].map { SKTexture(imageNamed: $0)! }
+				let frames = ["greenrobot1", "greenrobot2"].map { SKTexture(imageNamed: $0)! }
 				playAnimation(.Walk, frames: frames)
 			} else {
 				playAnimation(.Stand, frames: [SKTexture(imageNamed: "greenrobot1")!])
@@ -188,6 +204,25 @@ class Player : SKSpriteNode {
 				}
 			}
 		}
+	}
+	
+	var flash : SKSpriteNode?
+	
+	func startFlash() {
+		if flash == nil {
+			flash = SKSpriteNode(texture: SKTexture(imageNamed: "flash"))
+			flash?.xScale = 2
+			flash?.yScale = 2
+			let rotate = SKAction.rotateByAngle(π * 2, duration: 1)
+			let action = SKAction.repeatActionForever(rotate)
+			flash?.runAction(action)
+			addChild(flash!)
+		}
+	}
+	
+	func stopFlash() {
+		flash?.removeFromParent()
+		flash = nil
 	}
 	
 	func randomFireSound() -> String {
