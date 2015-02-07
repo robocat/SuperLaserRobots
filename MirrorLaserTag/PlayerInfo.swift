@@ -23,34 +23,24 @@ class PlayerInfo : SKNode {
 	}
 	
 	var image = SKSpriteNode(imageNamed: "avatar1")
-	var nameLabel = SKLabelNode(text: "Robot name")
 	var healthBar = HealthBar()
 	
-	var size : CGSize = CGSize(width: 425, height: 100)
+	var size : CGSize = CGSize(width: 350, height: 70)
 	
 	func setup() {
 		addChild(healthBar)
 		addChild(image)
-		addChild(nameLabel)
 		
 		if leftMode {
-			nameLabel.position = CGPoint(x: 160, y: 30)
-			healthBar.position = CGPoint(x: 150, y: -30)
-			image.position = CGPoint(x: 70, y: 0)
-			image.size = CGSize(width: 130, height: 130)
-			nameLabel.horizontalAlignmentMode = .Left
+			healthBar.position = CGPoint(x: 80, y: 0)
+			image.position = CGPoint(x: 40, y: 0)
+			image.size = CGSize(width: 60, height: 60)
 		} else {
-			nameLabel.position = CGPoint(x: 260, y: 30)
-			healthBar.position = CGPoint(x: 0, y: -30)
-			image.position = CGPoint(x: 350, y: 0)
-			image.size = CGSize(width: 130, height: 130)
-			nameLabel.horizontalAlignmentMode = .Right
+			healthBar.position = CGPoint(x: 0, y: 0)
+			image.position = CGPoint(x: 310, y: 0)
+			image.size = CGSize(width: 60, height: 60)
 		}
-		
-		nameLabel.fontName = "Helvetica"
 	}
-	
-	
 }
 
 class HealthBar : SKNode {

@@ -44,12 +44,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	func setupUI() {
 		let health1 = PlayerInfo(leftMode: true)
 		addChild(health1)
-		health1.position = CGPoint(x: 0, y: 100)
+		health1.position = CGPoint(x: 0, y: 50)
 		infoViews[players[0]] = health1
 		
 		let health2 = PlayerInfo(leftMode: false)
 		addChild(health2)
-		health2.position = CGPoint(x: size.width - health2.size.width, y: 100)
+		health2.position = CGPoint(x: size.width - health2.size.width, y: 50)
 		infoViews[players[1]] = health2
 		
 		let health3 = PlayerInfo(leftMode: true)
