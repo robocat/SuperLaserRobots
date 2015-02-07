@@ -47,6 +47,10 @@ struct Controls {
 		case Colon = 41
 		case Comma = 39
 		case Plus = 24
+		
+		// Other
+		case Enter = 36
+		case Escape = 53
 	}
 	
 	static var mappings: [[Key: Command]] {

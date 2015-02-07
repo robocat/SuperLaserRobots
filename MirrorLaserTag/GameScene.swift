@@ -14,15 +14,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var map: Map!
 	var infoViews : [Player: PlayerInfo] = [:]
 	
-	var musicPlayer : MusicPlayer?
-	
 	// MARK: Set Up
 	
     override func didMoveToView(view: SKView) {
 		setupPlayers()
 		setupMap()
 		setupUI()
-		setupMusic()
 		
         physicsWorld.contactDelegate = self
 		physicsBody = SKPhysicsBody(edgeLoopFromRect: map.frame)
@@ -56,12 +53,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		for player in players {
 			player.delegate = self
 		}
-	}
-	
-	func setupMusic() {
-		let path = NSBundle.mainBundle().URLForResource("LaserMusic", withExtension: "mp3")!
-		musicPlayer = MusicPlayer(fileURL: path)
-		musicPlayer?.play()
 	}
 	
 	func setupUI() {
@@ -99,7 +90,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	// MARK: Update Loop
 
     override func keyDown(theEvent: NSEvent) {
-		println(theEvent.keyCode)
+		if let key = Controls.Key(rawValue: Int(theEvent.keyCode)) {
+			switch key {
+			case .Escape: self.view?.presentScene(StartScene(size: size))
+			case _: break
+			}
+		}
+		
+		
 		for player in players {
 			player.handleKeyDown(theEvent.keyCode)
 		}
