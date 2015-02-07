@@ -64,7 +64,6 @@ class Player : SKSpriteNode {
 		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue
 	}
 	
-	
 	func update(timePassed: CFTimeInterval) {
 		var rotationsPerSecond = 0.3
 		var pixelsPerSecond : CGFloat = 1000
