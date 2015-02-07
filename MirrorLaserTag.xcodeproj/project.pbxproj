@@ -165,8 +165,8 @@
 		8162EF3B1A85736300B230AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				81838EEB1A86D014007D21AD /* Music */,
 				81CB89C71A8678AF00E8A932 /* Sounds */,
-				FF6150331A86702B00C42AFB /* LaserMusic.mp3 */,
 				8162EF201A8572EA00B230AD /* GameScene.sks */,
 				8162EF241A8572EA00B230AD /* MainMenu.xib */,
 				8162EF221A8572EA00B230AD /* Images.xcassets */,
@@ -189,6 +189,14 @@
 				81CB89C51A863C9600E8A932 /* PowerUp.swift */,
 			);
 			name = "Game Objects";
+			sourceTree = "<group>";
+		};
+		81838EEB1A86D014007D21AD /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				FF6150331A86702B00C42AFB /* LaserMusic.mp3 */,
+			);
+			name = Music;
 			sourceTree = "<group>";
 		};
 		81CB89C71A8678AF00E8A932 /* Sounds */ = {
