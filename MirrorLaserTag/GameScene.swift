@@ -78,10 +78,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		let health3 = PlayerInfo(leftMode: true)
 		addChild(health3)
 		health3.position = CGPoint(x: 0, y: size.height - health3.size.height)
+		infoViews[players[2]] = health3
 		
 		let health4 = PlayerInfo(leftMode: false)
 		addChild(health4)
 		health4.position = CGPoint(x: size.width - health4.size.width, y: size.height - health4.size.height)
+		infoViews[players[3]] = health4
 	}
 	
 	func setupMap() {
