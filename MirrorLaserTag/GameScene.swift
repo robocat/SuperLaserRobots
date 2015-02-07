@@ -161,7 +161,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 					
 					let scale = SKAction.scaleBy(3, duration: 0.2)
 					let fade = SKAction.fadeOutWithDuration(0.2)
-					let group = SKAction.group([scale, fade])
+					let sound = SKAction.playSoundFileNamed("Hit.wav", waitForCompletion: false)
+					let group = SKAction.group([scale, fade, sound])
 					let remove = SKAction.runBlock { fire.removeFromParent() }
 					let action = SKAction.sequence([group, remove])
 					fire.runAction(action)

@@ -23,6 +23,14 @@
 		81CB89C21A862AE400E8A932 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C11A862AE400E8A932 /* Obstacle.swift */; };
 		81CB89C41A862C2700E8A932 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C31A862C2700E8A932 /* Level.swift */; };
 		81CB89C61A863C9600E8A932 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C51A863C9600E8A932 /* PowerUp.swift */; };
+		81CB89D01A86799100E8A932 /* Dead.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89C81A86799100E8A932 /* Dead.wav */; };
+		81CB89D11A86799100E8A932 /* Hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89C91A86799100E8A932 /* Hit.wav */; };
+		81CB89D21A86799100E8A932 /* Laser1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89CA1A86799100E8A932 /* Laser1.wav */; };
+		81CB89D31A86799100E8A932 /* Laser2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89CB1A86799100E8A932 /* Laser2.wav */; };
+		81CB89D41A86799100E8A932 /* Laser3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89CC1A86799100E8A932 /* Laser3.wav */; };
+		81CB89D51A86799100E8A932 /* Ricochet1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89CD1A86799100E8A932 /* Ricochet1.wav */; };
+		81CB89D61A86799100E8A932 /* Ricochet2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89CE1A86799100E8A932 /* Ricochet2.wav */; };
+		81CB89D71A86799100E8A932 /* Ricochet3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81CB89CF1A86799100E8A932 /* Ricochet3.wav */; };
 		FF16FB131A861BAB009A0DFC /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */; };
 		FF6150341A86702B00C42AFB /* LaserMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF6150331A86702B00C42AFB /* LaserMusic.mp3 */; };
 		FF6150361A86706600C42AFB /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6150351A86706600C42AFB /* MusicPlayer.swift */; };
@@ -59,6 +67,14 @@
 		81CB89C11A862AE400E8A932 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		81CB89C31A862C2700E8A932 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		81CB89C51A863C9600E8A932 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
+		81CB89C81A86799100E8A932 /* Dead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dead.wav; sourceTree = "<group>"; };
+		81CB89C91A86799100E8A932 /* Hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Hit.wav; sourceTree = "<group>"; };
+		81CB89CA1A86799100E8A932 /* Laser1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Laser1.wav; sourceTree = "<group>"; };
+		81CB89CB1A86799100E8A932 /* Laser2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Laser2.wav; sourceTree = "<group>"; };
+		81CB89CC1A86799100E8A932 /* Laser3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Laser3.wav; sourceTree = "<group>"; };
+		81CB89CD1A86799100E8A932 /* Ricochet1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ricochet1.wav; sourceTree = "<group>"; };
+		81CB89CE1A86799100E8A932 /* Ricochet2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ricochet2.wav; sourceTree = "<group>"; };
+		81CB89CF1A86799100E8A932 /* Ricochet3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ricochet3.wav; sourceTree = "<group>"; };
 		FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
 		FF6150331A86702B00C42AFB /* LaserMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LaserMusic.mp3; sourceTree = "<group>"; };
 		FF6150351A86706600C42AFB /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
@@ -143,6 +159,7 @@
 		8162EF3B1A85736300B230AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				81CB89C71A8678AF00E8A932 /* Sounds */,
 				FF6150331A86702B00C42AFB /* LaserMusic.mp3 */,
 				8162EF201A8572EA00B230AD /* GameScene.sks */,
 				8162EF241A8572EA00B230AD /* MainMenu.xib */,
@@ -166,6 +183,21 @@
 				81CB89C51A863C9600E8A932 /* PowerUp.swift */,
 			);
 			name = "Game Objects";
+			sourceTree = "<group>";
+		};
+		81CB89C71A8678AF00E8A932 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				81CB89C81A86799100E8A932 /* Dead.wav */,
+				81CB89C91A86799100E8A932 /* Hit.wav */,
+				81CB89CA1A86799100E8A932 /* Laser1.wav */,
+				81CB89CB1A86799100E8A932 /* Laser2.wav */,
+				81CB89CC1A86799100E8A932 /* Laser3.wav */,
+				81CB89CD1A86799100E8A932 /* Ricochet1.wav */,
+				81CB89CE1A86799100E8A932 /* Ricochet2.wav */,
+				81CB89CF1A86799100E8A932 /* Ricochet3.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,10 +280,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81CB89D11A86799100E8A932 /* Hit.wav in Resources */,
+				81CB89D71A86799100E8A932 /* Ricochet3.wav in Resources */,
+				81CB89D21A86799100E8A932 /* Laser1.wav in Resources */,
 				FF6150341A86702B00C42AFB /* LaserMusic.mp3 in Resources */,
+				81CB89D51A86799100E8A932 /* Ricochet1.wav in Resources */,
+				81CB89D61A86799100E8A932 /* Ricochet2.wav in Resources */,
+				81CB89D01A86799100E8A932 /* Dead.wav in Resources */,
 				8162EF211A8572EA00B230AD /* GameScene.sks in Resources */,
 				8162EF231A8572EA00B230AD /* Images.xcassets in Resources */,
+				81CB89D41A86799100E8A932 /* Laser3.wav in Resources */,
 				8162EF261A8572EA00B230AD /* MainMenu.xib in Resources */,
+				81CB89D31A86799100E8A932 /* Laser2.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
