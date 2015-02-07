@@ -119,8 +119,12 @@ class Player : SKSpriteNode {
 						let pSize = size
 						let offset = CGPoint(x: pSize.width * sin(-zRotation) + CGFloat(i) / 3.0, y: pSize.height * cos(zRotation) + CGFloat(i) / 3.0)
 						let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 3))
+						
 						let remover = SKAction.sequence([SKAction.waitForDuration(2), SKAction.removeFromParent()])
-						projectile.runAction(remover)
+						let sound = SKAction.playSoundFileNamed(randomFireSound(), waitForCompletion: false)
+						let grouped = SKAction.group([sound, remover])
+						
+						projectile.runAction(grouped)
 						map?.addChild(projectile)
 					}
 					//}
@@ -129,5 +133,10 @@ class Player : SKSpriteNode {
 				}
 			}
 		}
+	}
+	
+	func randomFireSound() -> String {
+		let rand = Int.random(Range(start: 1, end: 3))
+		return "Laser\(rand).wav"
 	}
 }
