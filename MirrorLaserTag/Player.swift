@@ -10,6 +10,7 @@ import SpriteKit
 
 class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
+	var health : Int = 100
 	
 	override init() {
 		let texture = SKTexture(imageNamed: "Spaceship")

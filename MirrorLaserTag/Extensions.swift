@@ -72,3 +72,7 @@ extension Int {
         return range.startIndex + arc4random_uniform(range.endIndex - range.startIndex + 1)
     }
 }
+
+func *(vector : CGVector, value : CGFloat) -> CGVector {
+	return CGVector(dx: vector.dx * value, dy: vector.dy * value)
+}
