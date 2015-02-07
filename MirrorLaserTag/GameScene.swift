@@ -28,14 +28,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	func setupPlayers() {
 		let player1 = Player()
 		player1.controls = Controls(player: player1, mappings: Controls.mappings[0])
-		player1.position = CGPoint(x: 100, y: 100)
+		player1.position = CGPoint(x: -500, y: -200)
+		player1.zRotation = -π / 4
 		players.append(player1)
 		
 		let player2 = Player()
 		player2.controls = Controls(player: player2, mappings: Controls.mappings[1])
-		player2.position = CGPoint(x: 300, y: 300)
+		player2.position = CGPoint(x: -500, y: 200)
+		player2.zRotation = -π * 0.75
 		players.append(player2)
 		
+		let player3 = Player()
+		player3.controls = Controls(player: player3, mappings: Controls.mappings[2])
+		player3.position = CGPoint(x: 500, y: -200)
+		player3.zRotation = π / 4
+		players.append(player3)
+		
+		let player4 = Player()
+		player4.controls = Controls(player: player4, mappings: Controls.mappings[3])
+		player4.position = CGPoint(x: 500, y: 200)
+		player4.zRotation = π * 0.75
+		players.append(player4)
+
 		for player in players {
 			player.delegate = self
 		}
@@ -63,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	
 	func setupMap() {
 		let levels = Level.all
-		map = Map(players: players, level: levels[0], size: size)
+		map = Map(players: players, level: levels[0], size: CGSize(width: 1024, height: 500))
 		map.position = CGPoint(x: size.width / 2, y: size.height / 2)
 		
 		addChild(map)
@@ -76,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	// MARK: Update Loop
 
     override func keyDown(theEvent: NSEvent) {
+		println(theEvent.keyCode)
 		for player in players {
 			player.handleKeyDown(theEvent.keyCode)
 		}

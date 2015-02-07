@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+//enum PowerUpType {
+//	case DiscoMode
+//}
+
 class PowerUp: SKSpriteNode {
 	
 }
