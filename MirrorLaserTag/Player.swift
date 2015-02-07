@@ -170,7 +170,7 @@ class Player : SKSpriteNode {
 				case .Fire:
 					state = .Shoot
 					let frames = [SKTexture(imageNamed: "greenrobot-shoot")!]
-					let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.5)
+					let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.2)
 					let end = SKAction.runBlock { self.state = .Stand; self.updateMoving() }
 					let sequence = SKAction.sequence([animation, end])
 					runAction(sequence)
