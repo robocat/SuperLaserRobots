@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
 		physicsBody = SKPhysicsBody(edgeLoopFromRect: map.frame)
+		position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
     }
 	
 	func setupBorders() {
@@ -199,7 +200,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 					player.health -= 1
 					
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
-					fire.position = convertPoint(contact.contactPoint, toNode: map)
+					
+					// This is fucked now
+//					fire.position = convertPoint(contact.contactPoint, toNode: map)
+					
+					fire.position = player.position
 					map.addChild(fire)
 					
 					let scale = SKAction.scaleBy(3, duration: 0.2)
