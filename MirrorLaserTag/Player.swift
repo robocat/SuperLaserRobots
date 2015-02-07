@@ -138,6 +138,6 @@ class Player : SKSpriteNode {
 	
 	func randomFireSound() -> String {
 		let rand = Int.random(Range(start: 1, end: 3))
-		return "Ricochet\(rand).wav"
+		return "Laser\(rand).wav"
 	}
 }
