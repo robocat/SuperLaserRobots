@@ -9,9 +9,8 @@
 import SpriteKit
 
 class Projectile: SKSpriteNode {
-	
-	convenience init(position: CGPoint, angle: CGFloat) {
-		let texture = SKTexture(imageNamed: "bullet")
+	convenience init(position: CGPoint, angle: CGFloat, color : String) {
+		let texture = SKTexture(imageNamed: "bullet \(color)")
 		self.init(texture: texture, color: nil, size: texture.size())
         self.position = position
         self.zRotation = angle - π/2

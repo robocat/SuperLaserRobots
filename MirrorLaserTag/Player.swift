@@ -36,20 +36,20 @@ class Player : SKSpriteNode {
 	var lastShot : CFTimeInterval
 	var playerName : String
 	var dead = false
+	var playerColor : String = "green" { didSet { texture = SKTexture(imageNamed: "\(playerColor)1") } }
 	
 	weak var delegate : PlayerDelegate?
 	weak var map : Map?
 	
 	override init() {
-		let texture = SKTexture(imageNamed: "greenrobot1")
 		lastShot = 0
 		playerName = "Anonymous"
-		super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
+		super.init(texture: nil, color: nil, size: CGSize(width: 96, height: 96))
 		direction = 0
 		setupPhysics()
 		
 		let heal = SKAction.runBlock { if !self.dead { self.health = min(self.health + 1, 100) } }
-		let wait = SKAction.waitForDuration(1)
+		let wait = SKAction.waitForDuration(3)
 		let sequence = SKAction.sequence([heal, wait])
 		runAction(SKAction.repeatActionForever(sequence))
 	}
@@ -135,10 +135,10 @@ class Player : SKSpriteNode {
 	func updateMoving() {
 		if state != .Shoot {
 			if moving {
-				let frames = ["greenrobot1", "greenrobot2"].map { SKTexture(imageNamed: $0)! }
+				let frames = ["\(playerColor)1", "\(playerColor)2"].map { SKTexture(imageNamed: $0)! }
 				playAnimation(.Walk, frames: frames)
 			} else {
-				playAnimation(.Stand, frames: [SKTexture(imageNamed: "greenrobot1")!])
+				playAnimation(.Stand, frames: [SKTexture(imageNamed: "\(playerColor)1")!])
 			}
 		}
 	}
@@ -170,7 +170,7 @@ class Player : SKSpriteNode {
 				case .Fire:
 					if !dead {
 						state = .Shoot
-						let frames = [SKTexture(imageNamed: "greenrobot-shoot")!]
+						let frames = [SKTexture(imageNamed: "\(playerColor)shoot")!]
 						let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.2)
 						let end = SKAction.runBlock { self.state = .Stand; self.updateMoving() }
 						let sequence = SKAction.sequence([animation, end])
@@ -188,7 +188,7 @@ class Player : SKSpriteNode {
 							//						projectile.runAction(remover)
 							
 							let offset = CGPoint(x: pSize.width * sin(-zRotation) + CGFloat(i) / 3.0, y: pSize.height * cos(zRotation) + CGFloat(i) / 3.0)
-							let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 3))
+							let projectile = Projectile(position: position + offset, angle: zRotation + (CGFloat(i) / 3), color: playerColor)
 							
 							let remover = SKAction.sequence([SKAction.waitForDuration(2), SKAction.removeFromParent()])
 							let sound = SKAction.playSoundFileNamed(randomFireSound(), waitForCompletion: false)
