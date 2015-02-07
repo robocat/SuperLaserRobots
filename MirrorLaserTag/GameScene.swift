@@ -42,6 +42,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		runAction(SKAction.sequence([SKAction.waitForDuration(10), SKAction.runBlock({
 			
 		})]))
+
+		position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
     }
 	
 	func setupBorders() {
@@ -185,7 +187,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		let formatted = NSString(format: "%02d:%02d", 60 - seconds, milliseconds)
 		countdown.text = formatted
 		
-		if seconds > 60 {
+		if minutes >= 1 {
 			moveToGameOversScene()
 		}
 
@@ -245,7 +247,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 					player.health -= 1
 					
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
-					fire.position = convertPoint(contact.contactPoint, toNode: map)
+					
+					// This is fucked now
+//					fire.position = convertPoint(contact.contactPoint, toNode: map)
+					
+					fire.position = player.position
 					map.addChild(fire)
 					
 					let scale = SKAction.scaleBy(3, duration: 0.2)
