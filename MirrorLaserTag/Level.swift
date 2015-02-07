@@ -23,19 +23,15 @@ struct Level {
 			return [
 				Level(obstacles: [
 					// Destructables
-					ObstaclePosition(type: .Plant,
-						position: CGPoint(x: 0, y: 0),
-						angle: 0,
-						size: CGSize(width: 52, height: 58)),
-					// Walls
-					ObstaclePosition(type: .Wall,
-						position: CGPoint(x: -400, y: -400),
-						angle: 0,
-						size: CGSize(width: 10, height: 400)),
-					ObstaclePosition(type: .Wall,
-						position: CGPoint(x: 0, y: 0),
-						angle: 2,
-						size: CGSize(width: 10, height: 100))
+//					ObstaclePosition(type: .Plant,
+//						position: CGPoint(x: 0, y: 0),
+//						angle: 0,
+//						size: CGSize(width: 52, height: 58)),
+//					// Walls
+//					ObstaclePosition(type: .Wall,
+//						position: CGPoint(x: 0, y: 0),
+//						angle: 2,
+//						size: CGSize(width: 10, height: 100))
 				])
 			]
 		}
