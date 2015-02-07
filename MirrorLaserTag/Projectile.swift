@@ -10,14 +10,16 @@ import SpriteKit
 
 class Projectile: SKSpriteNode {
 	
-	convenience init(position: CGPoint, angle: Double) {
+	convenience init(position: CGPoint, angle: CGFloat) {
 		let texture = SKTexture(imageNamed: "bullet")
 		self.init(texture: texture, color: nil, size: texture.size())
+        self.position = position
+        self.zRotation = angle - π/2
+        setupPhysics()
 	}
 	
 	override init(texture: SKTexture!, color: NSColor!, size: CGSize) {
 		super.init(texture: texture, color: color, size: size)
-		setupPhysics()
 	}
 
 	required init?(coder aDecoder: NSCoder) {
@@ -29,6 +31,12 @@ class Projectile: SKSpriteNode {
 		physicsBody?.affectedByGravity = false
 		physicsBody?.dynamic = true
 		physicsBody?.categoryBitMask = PhysicsType.Projectile.rawValue
+		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue
 		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue
+		//physicsBody?.restitution = 1.0
+		//physicsBody?.allowsRotation = true
+        
+        let v = CGVector(dx: 500.0 * -cos(self.zRotation), dy: -500.0 * sin(self.zRotation))
+        physicsBody?.velocity = v
 	}
 }

@@ -11,6 +11,6 @@ import Foundation
 enum PhysicsType: UInt32 {
 	case Player = 1
 	case Obstacle = 2
-	case Mirror = 3
-	case Projectile = 4
+	case Mirror = 4
+	case Projectile = 8
 }

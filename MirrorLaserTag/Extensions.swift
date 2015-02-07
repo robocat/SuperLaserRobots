@@ -76,3 +76,15 @@ extension Int {
 func *(vector : CGVector, value : CGFloat) -> CGVector {
 	return CGVector(dx: vector.dx * value, dy: vector.dy * value)
 }
+func -(left: CGPoint, right: CGPoint) -> CGPoint {
+	return CGPoint(x: left.x - right.x, y: left.y - right.y)
+}
+func +(left: CGPoint, right: CGPoint) -> CGPoint {
+	return CGPoint(x: left.x + right.x, y: left.y + right.y)
+}
+func /(left: CGPoint, factor: CGFloat) -> CGPoint {
+	return CGPoint(x: left.x / factor, y: left.y / factor)
+}
+func *(left: CGPoint, factor: CGFloat) -> CGPoint {
+	return left / (1/factor)
+}
