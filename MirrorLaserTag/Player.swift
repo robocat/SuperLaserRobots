@@ -48,7 +48,7 @@ class Player : SKSpriteNode {
 		direction = 0
 		setupPhysics()
 		
-		let heal = SKAction.runBlock { self.health = min(self.health + 1, 100) }
+		let heal = SKAction.runBlock { if !self.dead { self.health = min(self.health + 1, 100) } }
 		let wait = SKAction.waitForDuration(1)
 		let sequence = SKAction.sequence([heal, wait])
 		runAction(SKAction.repeatActionForever(sequence))
