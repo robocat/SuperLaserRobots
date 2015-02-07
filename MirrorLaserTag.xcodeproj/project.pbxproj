@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		372DA0241A86AAAD0059C36F /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372DA0231A86AAAD0059C36F /* GameOverScene.swift */; };
 		8162EF1D1A8572E900B230AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF1C1A8572E900B230AD /* AppDelegate.swift */; };
 		8162EF1F1A8572EA00B230AD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF1E1A8572EA00B230AD /* GameScene.swift */; };
 		8162EF211A8572EA00B230AD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8162EF201A8572EA00B230AD /* GameScene.sks */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		372DA0231A86AAAD0059C36F /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		8162EF171A8572E900B230AD /* MirrorLaserTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MirrorLaserTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8162EF1B1A8572E900B230AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8162EF1C1A8572E900B230AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				8162EF1E1A8572EA00B230AD /* GameScene.swift */,
 				81CB89D91A867E1700E8A932 /* StartScene.swift */,
+				372DA0231A86AAAD0059C36F /* GameOverScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				81CB89C41A862C2700E8A932 /* Level.swift in Sources */,
 				8162EF421A85752E00B230AD /* Mirror.swift in Sources */,
 				FF6150361A86706600C42AFB /* MusicPlayer.swift in Sources */,
+				372DA0241A86AAAD0059C36F /* GameOverScene.swift in Sources */,
 				81CB89C21A862AE400E8A932 /* Obstacle.swift in Sources */,
 				8162EF4A1A85795C00B230AD /* PhysicsType.swift in Sources */,
 				8162EF1F1A8572EA00B230AD /* GameScene.swift in Sources */,

@@ -9,10 +9,13 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
+	
 	var time : CFTimeInterval = 0
 	var players: [Player] = []
 	var map: Map!
 	var infoViews : [Player: PlayerInfo] = [:]
+	var countdown = SKLabelNode(fontNamed: "PT Mono")
+	var firstTime : CFTimeInterval?
 	
 	// MARK: Set Up
 	
@@ -25,6 +28,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
 		physicsBody = SKPhysicsBody(edgeLoopFromRect: map.frame)
+		
+		countdown.fontSize = 54
+		countdown.position = CGPoint(x: 0, y: size.height / 2 - 60)
+		//countdown.size = CGSize(width: 200, height: 60)
+		countdown.verticalAlignmentMode = .Center
+		countdown.horizontalAlignmentMode = .Center
+		countdown.fontColor = .blackColor()
+		countdown.text = "00:00"
+		countdown.zPosition = 10000
+		addChild(countdown)
+		
+		runAction(SKAction.sequence([SKAction.waitForDuration(10), SKAction.runBlock({
+			
+		})]))
+
 		position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
     }
 	
@@ -157,13 +175,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	}
     
     override func update(currentTime: CFTimeInterval) {
+		if firstTime == nil {
+			firstTime = currentTime
+		}
 		var elapsedTime = currentTime - time
 		time = currentTime
+		
+		let minutes = Int(currentTime - firstTime!) / 60
+		let seconds = (Int(currentTime - firstTime!) % 60)
+		let milliseconds = 100 - Int(((currentTime - firstTime!) - Double(seconds)) * 100)
+		let formatted = NSString(format: "%02d:%02d", 60 - seconds, milliseconds)
+		countdown.text = formatted
+		
+		if minutes >= 1 {
+			moveToGameOversScene()
+		}
 
 		for player in players {
 			player.update(elapsedTime)
 		}
     }
+	
+	func moveToGameOversScene() {
+		players.sort({$0.score < $1.score})
+		
+		//let scoreboard = players.map { player in [player.name: player.score] }
+		
+		let scene = GameOverScene(players: players)
+		/* Set the scale mode to scale to fit the window */
+		scene.scaleMode = .AspectFit
+			
+		let transition = SKTransition.crossFadeWithDuration(0.3)
+		self.view?.presentScene(scene)
+		
+	}
 	
 	// MARK: SKPhysicsContactDelegate
 	
@@ -193,10 +238,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 			return
 		case PhysicsType.Projectile.rawValue | PhysicsType.Player.rawValue:
 			if let node = contact.bodyB.node {
+				//let node = node as? Projectile
 				if contact.bodyB.categoryBitMask == PhysicsType.Projectile.rawValue {
 					map.removeChildrenInArray([node])
 				}
 				if let player = contact.bodyA.node as? Player {
+					//player.lastReceivedDamageFrom = node.firedBy
 					player.health -= 1
 					
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
@@ -227,6 +274,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		}
 		
 		if player.health <= 0 {
+			player.score += 1
 			player.dead = true
 			player.hidden = true
 			player.physicsBody = nil

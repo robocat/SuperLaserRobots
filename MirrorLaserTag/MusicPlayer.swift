@@ -22,7 +22,7 @@ class MusicPlayer {
 	}
 	
 	func play() {
-		player.play()
+		//player.play()
 	}
 	
 	func pause() {
