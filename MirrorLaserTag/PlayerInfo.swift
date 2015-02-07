@@ -88,7 +88,7 @@ class HealthBar : SKNode {
 		emptyBar.size = size
 		filledBar.size = size
 		
-		let x = positionForHealth(health)
+		let x = positionForHealth(min(max(health, 0), 100))
 		filledBar.size = CGSize(width: x - 10, height: size.height - 12)
 		divider.position = CGPoint(x: x - 5, y: 0)
 	}

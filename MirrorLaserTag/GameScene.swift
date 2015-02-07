@@ -8,10 +8,11 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var time : CFTimeInterval = 0
 	var players: [Player] = []
 	var map: Map!
+	var infoViews : [Player: PlayerInfo] = [:]
 	
 	// MARK: Set Up
 	
@@ -48,16 +49,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		player4.position = CGPoint(x: 500, y: 200)
 		player4.zRotation = π * 0.75
 		players.append(player4)
+
+		for player in players {
+			player.delegate = self
+		}
 	}
 	
 	func setupUI() {
 		let health1 = PlayerInfo(leftMode: true)
 		addChild(health1)
 		health1.position = CGPoint(x: 0, y: 100)
+		infoViews[players[0]] = health1
 		
 		let health2 = PlayerInfo(leftMode: false)
 		addChild(health2)
 		health2.position = CGPoint(x: size.width - health2.size.width, y: 100)
+		infoViews[players[1]] = health2
 		
 		let health3 = PlayerInfo(leftMode: true)
 		addChild(health3)
@@ -136,9 +143,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		case PhysicsType.Projectile.rawValue | PhysicsType.Player.rawValue:
 			if let node = contact.bodyB.node {
 				map.removeChildrenInArray([node])
+				if let player = contact.bodyA.node as? Player {
+					player.health -= 1
+					
+					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
+					fire.position = convertPoint(contact.contactPoint, toNode: map)
+					map.addChild(fire)
+					
+					let scale = SKAction.scaleBy(3, duration: 0.2)
+					let fade = SKAction.fadeOutWithDuration(0.2)
+					let group = SKAction.group([scale, fade])
+					let remove = SKAction.runBlock { fire.removeFromParent() }
+					let action = SKAction.sequence([group, remove])
+					fire.runAction(action)
+				}
 			}
 		default:
 			return
+		}
+	}
+	
+	func playerDidChangeHealth(player: Player) {
+		if let infoView = infoViews[player] {
+			infoView.healthBar.health = player.health
+		}
+		
+		if player.health <= 0 {
+			player.dead = true
 		}
 	}
 }

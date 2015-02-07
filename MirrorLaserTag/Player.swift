@@ -8,35 +8,41 @@
 
 import SpriteKit
 
+@objc protocol PlayerDelegate {
+	func playerDidChangeHealth(player : Player)
+}
+
 class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
-
+	
 	var controls: Controls!
-
+	
 	var shouldTurnLeft: Bool = false
 	var shouldTurnRight: Bool = false
 	var shouldMoveFoward: Bool = false
 	
-	var health : Int = 100
-    var lastShot : CFTimeInterval
+	var health : Int = 100 { didSet { delegate?.playerDidChangeHealth(self) } }
+	var lastShot : CFTimeInterval
 	var playerName : String
-
+	var dead = false
+	
+	weak var delegate : PlayerDelegate?
 	weak var map : Map?
 	
 	override init() {
 		let texture = SKTexture(imageNamed: "Spaceship")
 		lastShot = 0
 		playerName = "Anonymous"
-        super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
+		super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
 		direction = 0
 		setupPhysics()
 	}
-    
+	
 	convenience init(playerName name : String, currentTime time : CFTimeInterval) {
-        self.init()
-        self.lastShot = time
+		self.init()
+		self.lastShot = time
 		playerName = name
-    }
+	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -57,7 +63,7 @@ class Player : SKSpriteNode {
 		physicsBody?.collisionBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue
 		physicsBody?.contactTestBitMask = PhysicsType.Mirror.rawValue | PhysicsType.Player.rawValue | PhysicsType.Projectile.rawValue
 	}
-
+	
 	
 	func update(timePassed: CFTimeInterval) {
 		var rotationsPerSecond = 0.3
@@ -65,19 +71,20 @@ class Player : SKSpriteNode {
 		
 		var rotation = (π * 2) * CGFloat(rotationsPerSecond) * CGFloat(timePassed)
 		
-		if shouldTurnLeft {
-			//player.direction += rotation
-			physicsBody?.applyAngularImpulse(rotation)
-		} else if shouldTurnRight {
-			//player.direction -= rotation
-			physicsBody?.applyAngularImpulse(-rotation)
-		}
-		
-		if shouldMoveFoward {
-			let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
-			//player.runAction(SKAction.moveBy(vector, duration: 0))
-			physicsBody?.applyImpulse(vector)
+		if !dead {
+			if shouldTurnLeft {
+				//player.direction += rotation
+				physicsBody?.applyAngularImpulse(rotation)
+			} else if shouldTurnRight {
+				//player.direction -= rotation
+				physicsBody?.applyAngularImpulse(-rotation)
+			}
 			
+			if shouldMoveFoward {
+				let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
+				//player.runAction(SKAction.moveBy(vector, duration: 0))
+				physicsBody?.applyImpulse(vector)
+			}
 		}
 	}
 	
