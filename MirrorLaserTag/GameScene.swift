@@ -56,7 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	
 	func setupMap() {
 		let levels = Level.all
-		map = Map(players: players, level: levels[0], size: size)
+		map = Map(players: players, level: levels[0], size: CGSize(width: 1024, height: 500))
 		map.position = CGPoint(x: size.width / 2, y: size.height / 2)
 		
 		addChild(map)
