@@ -30,7 +30,7 @@ class Player : SKSpriteNode {
 	weak var map : Map?
 	
 	override init() {
-		let texture = SKTexture(imageNamed: "Spaceship")
+		let texture = SKTexture(imageNamed: "greenrobot1")
 		lastShot = 0
 		playerName = "Anonymous"
 		super.init(texture: texture, color: nil, size: CGSize(width: 96, height: 96))
@@ -52,6 +52,32 @@ class Player : SKSpriteNode {
 		zRotation = direction
 	}
 	
+	enum State : Printable {
+		case Stand
+		case Walk
+		case Shoot
+		
+		var description : String {
+			switch self {
+			case .Stand: return "Stand"
+			case .Walk: return "Walk"
+			case .Shoot: return "Shoot"
+			}
+		}
+	}
+	
+	var moving = false
+	var state = State.Stand
+	
+	func playAnimation(state : State, frames : [SKTexture]) {
+		if self.state != state {
+			self.state = state
+			let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.1)
+			let action = SKAction.repeatActionForever(animation)
+			runAction(action)
+		}
+	}
+	
 	func setupPhysics() {
 		physicsBody = SKPhysicsBody(rectangleOfSize: size)
 		//physicsBody = SKPhysicsBody(texture: texture, size: size)
@@ -71,18 +97,33 @@ class Player : SKSpriteNode {
 		var rotation = (π * 2) * CGFloat(rotationsPerSecond) * CGFloat(timePassed)
 		
 		if !dead {
+			moving = false
+			
 			if shouldTurnLeft {
-				//player.direction += rotation
 				physicsBody?.applyAngularImpulse(rotation)
+				moving = true
 			} else if shouldTurnRight {
-				//player.direction -= rotation
 				physicsBody?.applyAngularImpulse(-rotation)
+				moving = true
 			}
 			
 			if shouldMoveFoward {
 				let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
-				//player.runAction(SKAction.moveBy(vector, duration: 0))
 				physicsBody?.applyImpulse(vector)
+				moving = true
+			}
+			
+			updateMoving()
+		}
+	}
+	
+	func updateMoving() {
+		if state != .Shoot {
+			if moving {
+				let frames = ["greenrobot1", "greenrobot2", "greenrobot3"].map { SKTexture(imageNamed: $0)! }
+				playAnimation(.Walk, frames: frames)
+			} else {
+				playAnimation(.Stand, frames: [SKTexture(imageNamed: "greenrobot1")!])
 			}
 		}
 	}
@@ -112,6 +153,13 @@ class Player : SKSpriteNode {
 				case .TurnRight: shouldTurnRight = false
 				case .Forward: shouldMoveFoward = false
 				case .Fire:
+					state = .Shoot
+					let frames = [SKTexture(imageNamed: "greenrobot-shoot")!]
+					let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.5)
+					let end = SKAction.runBlock { self.state = .Stand; self.updateMoving() }
+					let sequence = SKAction.sequence([animation, end])
+					runAction(sequence)
+					
 					//if (time - lastShot > 0.2) {
 					//	lastShot = time
 					for i in -5...5
