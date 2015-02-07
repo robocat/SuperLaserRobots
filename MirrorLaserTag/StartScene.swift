@@ -14,10 +14,10 @@ class StartScene: SKScene {
 		backgroundColor = NSColor.blackColor()
 		anchorPoint = CGPoint(x: 0.5, y: 0.5)
 		
-		let title = SKLabelNode(text: "Press Enter to Start")
+		let title = SKLabelNode(text: "Press   Enter   to   Start")
 		title.fontColor = NSColor.whiteColor()
-		title.fontSize = 52
-		title.fontName = "Helvetica"
+		title.fontSize = 32
+		title.fontName = "Pixeleris"
 		title.position = CGPoint(x: 0, y: 0)
 		
 		addChild(title)

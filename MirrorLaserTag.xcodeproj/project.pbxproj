@@ -22,6 +22,7 @@
 		8162EF481A85780D00B230AD /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF471A85780D00B230AD /* Projectile.swift */; };
 		8162EF4A1A85795C00B230AD /* PhysicsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF491A85795C00B230AD /* PhysicsType.swift */; };
 		81838EEA1A86CBA3007D21AD /* Respawn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81838EE91A86CBA3007D21AD /* Respawn.wav */; };
+		81838EEE1A86D3F1007D21AD /* Pixeleris.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 81838EEC1A86D3AD007D21AD /* Pixeleris.ttf */; };
 		81CB89C21A862AE400E8A932 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C11A862AE400E8A932 /* Obstacle.swift */; };
 		81CB89C41A862C2700E8A932 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C31A862C2700E8A932 /* Level.swift */; };
 		81CB89C61A863C9600E8A932 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C51A863C9600E8A932 /* PowerUp.swift */; };
@@ -49,6 +50,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		81838EED1A86D3DE007D21AD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Fonts;
+			dstSubfolderSpec = 7;
+			files = (
+				81838EEE1A86D3F1007D21AD /* Pixeleris.ttf in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		372DA0231A86AAAD0059C36F /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		8162EF171A8572E900B230AD /* MirrorLaserTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MirrorLaserTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +83,7 @@
 		8162EF471A85780D00B230AD /* Projectile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 		8162EF491A85795C00B230AD /* PhysicsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsType.swift; sourceTree = "<group>"; };
 		81838EE91A86CBA3007D21AD /* Respawn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Respawn.wav; sourceTree = "<group>"; };
+		81838EEC1A86D3AD007D21AD /* Pixeleris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pixeleris.ttf; sourceTree = "<group>"; };
 		81CB89C11A862AE400E8A932 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		81CB89C31A862C2700E8A932 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		81CB89C51A863C9600E8A932 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
@@ -165,6 +180,7 @@
 		8162EF3B1A85736300B230AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				81838EEC1A86D3AD007D21AD /* Pixeleris.ttf */,
 				81838EEB1A86D014007D21AD /* Music */,
 				81CB89C71A8678AF00E8A932 /* Sounds */,
 				8162EF201A8572EA00B230AD /* GameScene.sks */,
@@ -235,6 +251,7 @@
 				8162EF131A8572E900B230AD /* Sources */,
 				8162EF141A8572E900B230AD /* Frameworks */,
 				8162EF151A8572E900B230AD /* Resources */,
+				81838EED1A86D3DE007D21AD /* CopyFiles */,
 			);
 			buildRules = (
 			);
