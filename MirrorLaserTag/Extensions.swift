@@ -111,3 +111,7 @@ extension Array {
 		return self.first
 	}
 }
+
+func *(vector : CGVector, value : CGFloat) -> CGVector {
+	return CGVector(dx: vector.dx * value, dy: vector.dy * value)
+}

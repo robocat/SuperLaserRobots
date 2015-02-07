@@ -19,6 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
 		setupPlayers()
 		setupMap()
+		setupUI()
 		
         physicsWorld.contactDelegate = self
     }
@@ -35,6 +36,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		players.append(player2)
 	}
 	
+	func setupUI() {
+		let health1 = PlayerInfo(leftMode: true)
+		addChild(health1)
+		health1.position = CGPoint(x: 0, y: 100)
+		
+		let health2 = PlayerInfo(leftMode: false)
+		addChild(health2)
+		health2.position = CGPoint(x: size.width - health2.size.width, y: 100)
+		
+		let health3 = PlayerInfo(leftMode: true)
+		addChild(health3)
+		health3.position = CGPoint(x: 0, y: size.height - health3.size.height)
+		
+		let health4 = PlayerInfo(leftMode: false)
+		addChild(health4)
+		health4.position = CGPoint(x: size.width - health4.size.width, y: size.height - health4.size.height)
+	}
+	
 	func setupMap() {
 		let levels = Level.all
 		map = Map(players: players, level: levels[0], size: size)
@@ -44,12 +63,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
 	// MARK: Update Loop
-    
+
     override func keyDown(theEvent: NSEvent) {
 		for player in players {
 			player.handleKeyDown(theEvent.keyCode)
 		}
-    }
+	}
 	
 	override func keyUp(theEvent: NSEvent) {
 		for player in players {

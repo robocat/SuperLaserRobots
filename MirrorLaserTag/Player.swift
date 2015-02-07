@@ -10,11 +10,14 @@ import SpriteKit
 
 class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
+
 	var controls: Controls!
 
 	var shouldTurnLeft: Bool = false
 	var shouldTurnRight: Bool = false
+	var shouldMoveFoward: Bool = false
 	
+	var health : Int = 100
 	
 	override init() {
 		let texture = SKTexture(imageNamed: "Spaceship")
@@ -39,12 +42,20 @@ class Player : SKSpriteNode {
 		} else if shouldTurnRight {
 			direction -= rotation
 		}
+		
+		if shouldMoveFoward {
+			var pixelsPerSecond: CGFloat = 500
+			let vector = CGVector(dx: sin(-direction), dy: cos(direction)) * pixelsPerSecond * CGFloat(timePassed)
+			
+			runAction(SKAction.moveBy(vector, duration: 0))
+		}
 	}
 	
 	func performCommand(command: Command) {
 		switch command {
 		case .TurnLeft: shouldTurnLeft = true
 		case .TurnRight: shouldTurnRight = true
+		case .Forward: shouldMoveFoward = true
 		case _: break
 		}
 	}
@@ -63,6 +74,7 @@ class Player : SKSpriteNode {
 				switch command {
 				case .TurnLeft: shouldTurnLeft = false
 				case .TurnRight: shouldTurnRight = false
+				case .Forward: shouldMoveFoward = false
 				case _: break
 				}
 			}

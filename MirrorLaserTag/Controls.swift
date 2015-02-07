@@ -27,9 +27,9 @@ struct Controls {
 		case Backspace = 51
 		
 		case A = 0
-		case W = 1
+		case W = 13
 		case D = 2
-		case S = 3
+		case S = 1
 		case Tab = 48
 		
 		case G = 5
