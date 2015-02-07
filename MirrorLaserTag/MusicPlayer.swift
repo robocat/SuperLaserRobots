@@ -17,6 +17,7 @@ class MusicPlayer {
 		
 		player = AVAudioPlayer(contentsOfURL: fileURL, error: &error)
 		player.numberOfLoops = -1
+		player.volume = 0.7
 		player.prepareToPlay()
 	}
 	
