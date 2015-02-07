@@ -20,10 +20,12 @@
 		8162EF461A8575B300B230AD /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF451A8575B300B230AD /* Controls.swift */; };
 		8162EF481A85780D00B230AD /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF471A85780D00B230AD /* Projectile.swift */; };
 		8162EF4A1A85795C00B230AD /* PhysicsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162EF491A85795C00B230AD /* PhysicsType.swift */; };
-		FF16FB131A861BAB009A0DFC /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */; };
 		81CB89C21A862AE400E8A932 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C11A862AE400E8A932 /* Obstacle.swift */; };
 		81CB89C41A862C2700E8A932 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C31A862C2700E8A932 /* Level.swift */; };
 		81CB89C61A863C9600E8A932 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB89C51A863C9600E8A932 /* PowerUp.swift */; };
+		FF16FB131A861BAB009A0DFC /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */; };
+		FF6150341A86702B00C42AFB /* LaserMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF6150331A86702B00C42AFB /* LaserMusic.mp3 */; };
+		FF6150361A86706600C42AFB /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6150351A86706600C42AFB /* MusicPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +56,12 @@
 		8162EF451A8575B300B230AD /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		8162EF471A85780D00B230AD /* Projectile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 		8162EF491A85795C00B230AD /* PhysicsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsType.swift; sourceTree = "<group>"; };
-		FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
 		81CB89C11A862AE400E8A932 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		81CB89C31A862C2700E8A932 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		81CB89C51A863C9600E8A932 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
+		FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
+		FF6150331A86702B00C42AFB /* LaserMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LaserMusic.mp3; sourceTree = "<group>"; };
+		FF6150351A86706600C42AFB /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,7 @@
 				8162EF3C1A85736C00B230AD /* Game Objects */,
 				8162EF1E1A8572EA00B230AD /* GameScene.swift */,
 				8162EF3D1A85739E00B230AD /* Extensions.swift */,
+				FF6150351A86706600C42AFB /* MusicPlayer.swift */,
 			);
 			path = MirrorLaserTag;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 		8162EF3B1A85736300B230AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FF6150331A86702B00C42AFB /* LaserMusic.mp3 */,
 				8162EF201A8572EA00B230AD /* GameScene.sks */,
 				8162EF241A8572EA00B230AD /* MainMenu.xib */,
 				8162EF221A8572EA00B230AD /* Images.xcassets */,
@@ -242,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF6150341A86702B00C42AFB /* LaserMusic.mp3 in Resources */,
 				8162EF211A8572EA00B230AD /* GameScene.sks in Resources */,
 				8162EF231A8572EA00B230AD /* Images.xcassets in Resources */,
 				8162EF261A8572EA00B230AD /* MainMenu.xib in Resources */,
@@ -266,6 +273,7 @@
 				8162EF401A85750600B230AD /* Player.swift in Sources */,
 				81CB89C41A862C2700E8A932 /* Level.swift in Sources */,
 				8162EF421A85752E00B230AD /* Mirror.swift in Sources */,
+				FF6150361A86706600C42AFB /* MusicPlayer.swift in Sources */,
 				81CB89C21A862AE400E8A932 /* Obstacle.swift in Sources */,
 				8162EF4A1A85795C00B230AD /* PhysicsType.swift in Sources */,
 				8162EF1F1A8572EA00B230AD /* GameScene.swift in Sources */,
