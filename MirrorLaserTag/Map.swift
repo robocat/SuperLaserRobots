@@ -47,7 +47,6 @@ class Map: SKSpriteNode {
 	
 	func setupPlayers() {
 		for player in players {
-			player.position = CGPoint(x: 100, y: 100)
 			addChild(player)
 		}
 	}

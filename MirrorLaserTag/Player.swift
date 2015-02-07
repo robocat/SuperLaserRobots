@@ -10,6 +10,11 @@ import SpriteKit
 
 class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
+	var controls: Controls!
+
+	var shouldTurnLeft: Bool = false
+	var shouldTurnRight: Bool = false
+	
 	
 	override init() {
 		let texture = SKTexture(imageNamed: "Spaceship")
@@ -23,5 +28,44 @@ class Player : SKSpriteNode {
 	
 	func updateDirection() {
 		zRotation = direction
+	}
+	
+	func update(timePassed: CFTimeInterval) {
+		var rotationsPerSecond: CGFloat = 1.2
+		var rotation = (π * 2) * rotationsPerSecond * CGFloat(timePassed)
+
+		if shouldTurnLeft {
+			direction += rotation
+		} else if shouldTurnRight {
+			direction -= rotation
+		}
+	}
+	
+	func performCommand(command: Command) {
+		switch command {
+		case .TurnLeft: shouldTurnLeft = true
+		case .TurnRight: shouldTurnRight = true
+		case _: break
+		}
+	}
+	
+	func handleKeyDown(keyCode: UInt16) {
+		if let key = Controls.Key(rawValue: Int(keyCode)) {
+			if let command = controls.mappings[key] {
+				performCommand(command)
+			}
+		}
+	}
+	
+	func handleKeyUp(keyCode: UInt16) {
+		if let key = Controls.Key(rawValue: Int(keyCode)) {
+			if let command = controls.mappings[key] {
+				switch command {
+				case .TurnLeft: shouldTurnLeft = false
+				case .TurnRight: shouldTurnRight = false
+				case _: break
+				}
+			}
+		}
 	}
 }
