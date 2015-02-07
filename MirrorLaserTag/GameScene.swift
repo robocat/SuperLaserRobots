@@ -12,12 +12,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	var time : CFTimeInterval = 0
 	
     let player = Player()
+	var map: Map!
+	
+	// MARK: Set Up
 	
     override func didMoveToView(view: SKView) {
-//		backgroundColor = .blackColor()
-		player.position = CGPoint(x: 100, y: 100)
-		addChild(player)
+		setupPlayers()
+		setupMap()
+		setupUI()
 		
+        physicsWorld.contactDelegate = self
+    }
+	
+	func setupPlayers() {
+//		player.position = CGPoint(x: 100, y: 100)
+//		addChild(player)
+	}
+	
+	func setupUI() {
 		let health1 = PlayerInfo(leftMode: true)
 		addChild(health1)
 		health1.position = CGPoint(x: 0, y: 100)
@@ -33,9 +45,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		let health4 = PlayerInfo(leftMode: false)
 		addChild(health4)
 		health4.position = CGPoint(x: size.width - health4.size.width, y: size.height - health4.size.height)
+	}
+	
+	func setupMap() {
+		let levels = Level.all
+		map = Map(players: [player], level: levels[0], size: size)
+		map.position = CGPoint(x: size.width / 2, y: size.height / 2)
 		
-        physicsWorld.contactDelegate = self
-    }
+		addChild(map)
+	}
+	
+	// MARK: Update Loop
 	
 	var leftPressed : Bool = false
 	var rightPressed : Bool = false
