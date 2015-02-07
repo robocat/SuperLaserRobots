@@ -36,7 +36,8 @@ class Map: SKSpriteNode {
 			let node = Obstacle(type: op.type)
 //			let x = -(anchorPoint.x * size.width) + op.position.x
 //			let y = -(anchorPoint.y * size.height) + op.position.y
-			node.position = position
+			node.size = op.size
+			node.position = op.position
 			node.zRotation = op.angle
 			node.zPosition = 2
 			
