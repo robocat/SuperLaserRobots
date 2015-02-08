@@ -79,8 +79,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		
 		let player2 = Player()
 		player2.controls = Controls(player: player2, mappings: Controls.mappings[1])
-		player2.position = CGPoint(x: -370, y: 320)
-		player2.zRotation = -π * 0.75
+		player2.position = CGPoint(x: 370, y: 320)
+		player2.zRotation = π * 0.75
 		player2.playerColor = "blue"
 		players.append(player2)
 		
@@ -93,8 +93,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		
 		let player4 = Player()
 		player4.controls = Controls(player: player4, mappings: Controls.mappings[3])
-		player4.position = CGPoint(x: 370, y: 320)
-		player4.zRotation = π * 0.75
+		player4.position = CGPoint(x: -370, y: 320)
+		player4.zRotation = -π * 0.75
 		player4.playerColor = "red"
 		players.append(player4)
 
@@ -104,26 +104,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	}
 	
 	func setupUI() {
-		let health1 = PlayerInfo(leftMode: true)
+		let health1 = PlayerInfo(leftMode: true, playerColor: players[0].playerColor)
 		addChild(health1)
-		health1.position = CGPoint(x: 0, y: 0)
+		health1.position = CGPoint(x: -600 , y: -410)
 		
 		infoViews[players[0]] = health1
-//
-//		let health2 = PlayerInfo(leftMode: false)
-//		addChild(health2)
-//		health2.position = CGPoint(x: size.width - health2.size.width, y: 50)
-//		infoViews[players[1]] = health2
-//		
-//		let health3 = PlayerInfo(leftMode: true)
-//		addChild(health3)
-//		health3.position = CGPoint(x: 0, y: size.height - health3.size.height)
-//		infoViews[players[2]] = health3
-//		
-//		let health4 = PlayerInfo(leftMode: false)
-//		addChild(health4)
-//		health4.position = CGPoint(x: size.width - health4.size.width, y: size.height - health4.size.height)
-//		infoViews[players[3]] = health4
+
+		let health2 = PlayerInfo(leftMode: false, playerColor: players[1
+			].playerColor)
+		addChild(health2)
+		health2.position = CGPoint(x: 600, y: 410)
+		infoViews[players[1]] = health2
+
+		let health3 = PlayerInfo(leftMode: true, playerColor: players[2].playerColor)
+		addChild(health3)
+		health3.position = CGPoint(x: 600, y: -410)
+		infoViews[players[2]] = health3
+
+		let health4 = PlayerInfo(leftMode: false, playerColor: players[3].playerColor)
+		addChild(health4)
+		health4.position = CGPoint(x: -600, y: 410)
+		infoViews[players[3]] = health4
 	}
 	
 	func setupMap() {

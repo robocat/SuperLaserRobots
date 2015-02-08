@@ -11,8 +11,10 @@ import SpriteKit
 
 class PlayerInfo : SKNode {
 	let leftMode : Bool
+	let playerColor: String
 	
-	init(leftMode : Bool) {
+	init(leftMode : Bool, playerColor: String) {
+		self.playerColor = playerColor
 		self.leftMode = leftMode
 		super.init()
 		setup()
@@ -22,34 +24,36 @@ class PlayerInfo : SKNode {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	var image = SKSpriteNode(imageNamed: "avatar1")
+	var image: SKSpriteNode!
 	var healthBar = HealthBar()
 	var killCount = SKLabelNode(text: "0")
 	
-	var size : CGSize = CGSize(width: 350, height: 70)
+	var size : CGSize = CGSize(width: 200, height: 70)
 	
 	var numberOfKills : Int = 0 { didSet { killCount.text = "\(numberOfKills)" } }
 	
 	func setup() {
+		image = SKSpriteNode(imageNamed: "avatar_\(playerColor)")
+		
 		addChild(healthBar)
 		addChild(image)
 		addChild(killCount)
 		
-		killCount.fontName = "Helvetica"
-		killCount.fontColor = .blackColor()
-		killCount.fontSize = 60
+		killCount.fontName = "Pixeleris"
+		killCount.fontColor = .whiteColor()
+		killCount.fontSize = 32
 		
 		if leftMode {
-			healthBar.position = CGPoint(x: 80, y: 0)
-			image.position = CGPoint(x: 40, y: 0)
-			image.size = CGSize(width: 60, height: 60)
-			killCount.position = CGPoint(x: 380, y: -20)
+			healthBar.position = CGPoint(x: -55, y: 0)
+			image.position = CGPoint(x: 60, y: 0)
+			image.size = CGSize(width: 48, height: 50)
+			killCount.position = CGPoint(x: -82, y: -20)
 			killCount.horizontalAlignmentMode = .Left
 		} else {
-			healthBar.position = CGPoint(x: 0, y: 0)
-			image.position = CGPoint(x: 310, y: 0)
-			image.size = CGSize(width: 60, height: 60)
-			killCount.position = CGPoint(x: -30, y: -20)
+			healthBar.position = CGPoint(x: -25, y: 0)
+			image.position = CGPoint(x: -60, y: 0)
+			image.size = CGSize(width: 48, height: 50)
+			killCount.position = CGPoint(x: 82, y: -20)
 			killCount.horizontalAlignmentMode = .Right
 		}
 	}
@@ -66,22 +70,22 @@ class HealthBar : SKNode {
 	}
 	
 	var health : Int = 100 { didSet { updateHealth() } }
-	var size : CGSize = CGSize(width: 272, height: 62) { didSet { updateHealth() } }
+	var size : CGSize = CGSize(width: 84, height: 22) { didSet { updateHealth() } }
 	
-	var filledBar = SKSpriteNode(texture: SKTexture(imageNamed: "health bar filled"))
-	var emptyBar = SKSpriteNode(texture: SKTexture(imageNamed: "health bar empty"))
-	var divider = SKSpriteNode(texture: SKTexture(imageNamed: "health bar divider"))
+	var filledBar = SKSpriteNode(texture: SKTexture(imageNamed: "healthgreen"))
+	var emptyBar = SKSpriteNode(texture: SKTexture(imageNamed: "healthempty"))
+//	var divider = SKSpriteNode(texture: SKTexture(imageNamed: "health bar divider"))
 	
 	func setup() {
 		addChild(emptyBar)
 		addChild(filledBar)
-		addChild(divider)
+//		addChild(divider)
 		
 		filledBar.anchorPoint = CGPoint(x: 0, y: 0.5)
 		emptyBar.anchorPoint = CGPoint(x: 0, y: 0.5)
-		divider.anchorPoint = CGPoint(x: 0, y: 0.5)
+//		divider.anchorPoint = CGPoint(x: 0, y: 0.5)
 		
-		filledBar.position = CGPoint(x: 10, y: 0)
+		filledBar.position = CGPoint(x: 0, y: 0)
 		
 		updateHealth()
 	}
@@ -91,12 +95,12 @@ class HealthBar : SKNode {
 		filledBar.size = size
 		
 		let x = positionForHealth(min(max(health, 0), 100))
-		filledBar.size = CGSize(width: x - 10, height: size.height - 12)
-		divider.position = CGPoint(x: x - 5, y: 0)
+		filledBar.size = CGSize(width: x, height: size.height)
+//		divider.position = CGPoint(x: x - 5, y: 0)
 	}
 	
 	func positionForHealth(health : Int) -> CGFloat {
-		let padding : CGFloat = 10
+		let padding : CGFloat = 0
 		let x = ((size.width - padding * 2) / 100) * CGFloat(health)
 		return x + padding
 	}
