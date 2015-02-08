@@ -9,13 +9,20 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
-	
 	var time : CFTimeInterval = 0
 	var players: [Player] = []
 	var map: Map!
 	var infoViews : [Player: PlayerInfo] = [:]
 	var countdown = SKLabelNode(fontNamed: "PT Mono")
 	var firstTime : CFTimeInterval?
+	
+	var waiting1 : SKSpriteNode!
+	var waiting2 : SKSpriteNode!
+	var waiting3 : SKSpriteNode!
+	var waiting4 : SKSpriteNode!
+	var overlay : SKSpriteNode!
+	var waitings : [String: SKSpriteNode] = [:]
+	var waiting = true
 	
 	// MARK: Set Up
 	
@@ -24,10 +31,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		setupMap()
 		setupBorders()
 		setupUI()
+		setupPressFireToJoin()
 		
 		anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
 		physicsBody = SKPhysicsBody(edgeLoopFromRect: map.frame)
+		
+		backgroundColor = NSColor(calibratedRed: 0.29, green: 0.29, blue: 0.29, alpha: 1)
 		
 		countdown.fontSize = 54
 		countdown.position = CGPoint(x: 0, y: size.height / 2 - 60)
@@ -103,6 +113,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		}
 	}
 	
+	func setupPressFireToJoin() {
+		waiting1 = SKSpriteNode(texture: SKTexture(imageNamed: "\(players[0].playerColor) waiting"))
+		waiting1.size = CGSize(width: 192, height: 288)
+		waiting1.position = CGPoint(x: -600, y: -220)
+		addChild(waiting1)
+		
+		waiting2 = SKSpriteNode(texture: SKTexture(imageNamed: "\(players[1].playerColor) waiting"))
+		waiting2.size = CGSize(width: 192, height: 288)
+		waiting2.position = CGPoint(x: 600, y: 220)
+		addChild(waiting2)
+		
+		waiting3 = SKSpriteNode(texture: SKTexture(imageNamed: "\(players[2].playerColor) waiting"))
+		waiting3.size = CGSize(width: 192, height: 288)
+		waiting3.position = CGPoint(x: 600, y: -220)
+		addChild(waiting3)
+		
+		waiting4 = SKSpriteNode(texture: SKTexture(imageNamed: "\(players[3].playerColor) waiting"))
+		waiting4.size = CGSize(width: 192, height: 288)
+		waiting4.position = CGPoint(x: -600, y: 220)
+		addChild(waiting4)
+		
+		waitings[players[0].playerColor] = waiting1
+		waitings[players[1].playerColor] = waiting2
+		waitings[players[2].playerColor] = waiting3
+		waitings[players[3].playerColor] = waiting4
+		
+		overlay = SKSpriteNode(texture: SKTexture(imageNamed: "pressstart"))
+		addChild(overlay)
+		overlay.zPosition = 10000
+	}
+	
 	func setupUI() {
 		let health1 = PlayerInfo(leftMode: true, playerColor: players[0].playerColor)
 		addChild(health1)
@@ -149,16 +190,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	// MARK: Update Loop
 
     override func keyDown(theEvent: NSEvent) {
-		if let key = Controls.Key(rawValue: Int(theEvent.keyCode)) {
+//		if let key = Controls.Key(rawValue: Int(theEvent.keyCode)) {
+//			switch key {
+//			case .Escape: self.view?.presentScene(StartScene(size: size))
+//			case _: break
+//			}
+//		}
+		
+		if waiting {
+			for player in players {
+				if let key = Controls.Key(rawValue: Int(theEvent.keyCode)) {
+					if let command = player.controls.mappings[key] {
+						if command == .Fire {
+							let waitingNode = waitings[player.playerColor]!
+							waitingNode.texture = SKTexture(imageNamed: "\(player.playerColor)")
+						}
+					}
+				}
+			}
+			
+			let key = Controls.Key(rawValue: Int(theEvent.keyCode))
 			switch key {
-			case .Escape: self.view?.presentScene(StartScene(size: size))
+			case .Some(.Enter):
+				waiting = false
+				overlay.removeFromParent()
+				waiting1.removeFromParent()
+				waiting2.removeFromParent()
+				waiting3.removeFromParent()
+				waiting4.removeFromParent()
 			case _: break
 			}
-		}
-		
-		
-		for player in players {
-			player.handleKeyDown(theEvent.keyCode)
+		} else {
+			for player in players {
+				player.handleKeyDown(theEvent.keyCode)
+			}
 		}
 	}
 	
@@ -172,8 +237,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	}
 	
 	override func keyUp(theEvent: NSEvent) {
-		for player in players {
-			player.handleKeyUp(theEvent.keyCode)
+		if waiting {
+			
+		} else {
+			for player in players {
+				player.handleKeyUp(theEvent.keyCode)
+			}
 		}
 	}
     
