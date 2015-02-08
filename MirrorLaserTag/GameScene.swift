@@ -180,13 +180,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		var elapsedTime = currentTime - time
 		time = currentTime
 		
+		let gameLength = 3
+		
 		let minutes = Int(currentTime - firstTime!) / 60
 		let seconds = (Int(currentTime - firstTime!) % 60)
 		let milliseconds = 100 - Int(((currentTime - firstTime!) - Double(seconds)) * 100)
-		let formatted = NSString(format: "%02d:%02d", 60 - seconds, milliseconds)
+		let formatted = NSString(format: "%02d:%02d",gameLength-1 - minutes, 60 - seconds)
 		countdown.text = formatted
 		
-		if minutes >= 1 {
+		if minutes >= gameLength {
 			moveToGameOversScene()
 		}
 
