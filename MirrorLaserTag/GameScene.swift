@@ -13,7 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var players: [Player] = []
 	var map: Map!
 	var infoViews : [Player: PlayerInfo] = [:]
-	var countdown = SKLabelNode(fontNamed: "PT Mono")
+	var countdown = SKLabelNode(fontNamed: "Pixeleris")
 	var firstTime : CFTimeInterval?
 	
 	var waiting1 : SKSpriteNode!
@@ -47,10 +47,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		countdown.text = "00:00"
 		countdown.zPosition = 10000
 		addChild(countdown)
-		
-		runAction(SKAction.sequence([SKAction.waitForDuration(10), SKAction.runBlock({
-			
-		})]))
     }
 	
 	func setupBorders() {
@@ -312,11 +308,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 			return
 		case PhysicsType.Projectile.rawValue | PhysicsType.Player.rawValue:
 			if let node = contact.bodyB.node {
-				//let node = node as? Projectile
 				if contact.bodyB.categoryBitMask == PhysicsType.Projectile.rawValue {
 					map.removeChildrenInArray([node])
 				}
+				if contact.bodyA.categoryBitMask == PhysicsType.Projectile.rawValue {
+					if let node = contact.bodyA.node {
+						map.removeChildrenInArray([node])
+					}
+				}
 				if let player = contact.bodyA.node as? Player {
+					//player.lastReceivedDamageFrom = node.firedBy
+					player.health -= 1
+					
+					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
+					
+					// This is fucked now
+					//fire.position = convertPoint(contact.contactPoint, toNode: map)
+					
+					let offset = CGPoint(x: size.width / 2, y: size.height / 2)
+					fire.position = contact.contactPoint - offset
+					//fire.zPosition = 100
+					map.addChild(fire)
+					
+					let scale = SKAction.scaleBy(3, duration: 0.2)
+					let fade = SKAction.fadeOutWithDuration(0.2)
+					let sound = SKAction.playSoundFileNamed("Hit.wav", waitForCompletion: false)
+					let group = SKAction.group([scale, fade, sound])
+					let remove = SKAction.runBlock { fire.removeFromParent() }
+					let action = SKAction.sequence([group, remove])
+					fire.runAction(action)
+				}
+				if let player = contact.bodyB.node as? Player {
 					//player.lastReceivedDamageFrom = node.firedBy
 					player.health -= 1
 					
