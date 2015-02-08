@@ -192,7 +192,7 @@ class Player : SKSpriteNode {
 						let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 4	
 						for i in -bulletCount...bulletCount
 						{
-							let pSize = size
+							let pSize = CGSize(width: size.width / 1.2, height: size.height / 1.2)
 							// put it back inside the trigonometric calls to fan out bullets
 							// + CGFloat(i) / 10.0
 							//						let offset = CGPoint(x: pSize.width * sin(-(zRotation + CGFloat(i) / 10.0)), y: pSize.height * cos(zRotation + CGFloat(i) / 10.0))
