@@ -24,7 +24,7 @@ class GameOverScene : SKScene {
 		let title = SKLabelNode(text: "gg wp")
 		title.fontColor = NSColor.whiteColor()
 		title.fontSize = 52
-		title.fontName = "Helvetica"
+		title.fontName = "Pixeleris"
 		title.position = CGPoint(x: 0, y: 100)
 		
 		
@@ -32,7 +32,7 @@ class GameOverScene : SKScene {
 		for i in 0..<players!.count
 		{
 			let player = players![i]
-			let score = SKLabelNode(fontNamed: "Helvetica")
+			let score = SKLabelNode(fontNamed: "Pixeleris")
 			score.fontSize = 40
 			switch player.playerColor {
 				case "red":
