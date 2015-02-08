@@ -102,7 +102,8 @@ class Player : SKSpriteNode {
 	}
 	
 	func setupPhysics() {
-		physicsBody = SKPhysicsBody(rectangleOfSize: size)
+		let pSize = CGSize(width: size.width / 1.2, height: size.height / 1.2)
+		physicsBody = SKPhysicsBody(rectangleOfSize: pSize)
 		//let newSize = sqrt(pow(size.height, 2) + pow(size.width, 2)) / 3
 		//physicsBody = SKPhysicsBody(circleOfRadius: newSize)
 		//physicsBody = SKPhysicsBody(texture: texture, size: size)
@@ -192,7 +193,7 @@ class Player : SKSpriteNode {
 						let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 4	
 						for i in -bulletCount...bulletCount
 						{
-							let pSize = CGSize(width: size.width / 1.2, height: size.height / 1.2)
+							let pSize = CGSize(width: size.width / 1.4, height: size.height / 1.4)
 							// put it back inside the trigonometric calls to fan out bullets
 							// + CGFloat(i) / 10.0
 							//						let offset = CGPoint(x: pSize.width * sin(-(zRotation + CGFloat(i) / 10.0)), y: pSize.height * cos(zRotation + CGFloat(i) / 10.0))
