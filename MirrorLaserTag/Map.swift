@@ -49,7 +49,10 @@ class Map: SKSpriteNode {
 			node.size = op.size
 			node.position = op.position
 			node.zRotation = op.angle
-			node.zPosition = 2
+			node.zPosition = 20
+			if op.flipped {
+				node.xScale = -1.0
+			}
 			
 			addChild(node)
 		}

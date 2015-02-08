@@ -12,6 +12,7 @@ struct ObstaclePosition {
 	let type: ObstacleType
 	let position: CGPoint
 	let angle: CGFloat
+	let flipped: Bool
 	let size: CGSize
 }
 
@@ -28,10 +29,26 @@ struct Level {
 //						angle: 0,
 //						size: CGSize(width: 52, height: 58)),
 //					// Walls
-//					ObstaclePosition(type: .Wall,
-//						position: CGPoint(x: 0, y: 0),
-//						angle: 2,
-//						size: CGSize(width: 10, height: 100))
+					ObstaclePosition(type: .Wall,
+						position: CGPoint(x: -372, y: 0),
+						angle: 0,
+						flipped: false,
+						size: CGSize(width: 254, height: 14)),
+					ObstaclePosition(type: .Wall,
+						position: CGPoint(x: -20, y: 331),
+						angle: π/2,
+						flipped: true,
+						size: CGSize(width: 254, height: 14)),
+					ObstaclePosition(type: .Wall,
+						position: CGPoint(x: 40, y: -331),
+						angle: -π/2,
+						flipped: true,
+						size: CGSize(width: 254, height: 14)),
+					ObstaclePosition(type: .Wall,
+						position: CGPoint(x: 372, y: 0),
+						angle: 0,
+						flipped: true,
+						size: CGSize(width: 254, height: 14))
 				])
 			]
 		}
