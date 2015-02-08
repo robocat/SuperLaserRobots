@@ -23,6 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var overlay : SKSpriteNode!
 	var waitings : [String: SKSpriteNode] = [:]
 	var waiting = true
+	var numberOfPlayers = 0
 	
 	var musicPlayer : MusicPlayer?
 	var lobbyPlayer : MusicPlayer?
@@ -256,6 +257,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 							player.dead = false
 							player.inGame = true
 							player.setupPhysics()
+							numberOfPlayers++
 						}
 					}
 				}
@@ -264,17 +266,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 			let key = Controls.Key(rawValue: Int(theEvent.keyCode))
 			switch key {
 			case .Some(.Enter):
-				waiting = false
-				overlay.removeFromParent()
-				waiting1.removeFromParent()
-				waiting2.removeFromParent()
-				waiting3.removeFromParent()
-				waiting4.removeFromParent()
-				startGameMusic()
-				
-				for (player, infoView) in infoViews {
-					if !player.inGame {
-						infoView.removeFromParent()
+				if numberOfPlayers >= 2 {
+					waiting = false
+					overlay.removeFromParent()
+					waiting1.removeFromParent()
+					waiting2.removeFromParent()
+					waiting3.removeFromParent()
+					waiting4.removeFromParent()
+					startGameMusic()
+					
+					for (player, infoView) in infoViews {
+						if !player.inGame {
+							infoView.removeFromParent()
+						}
 					}
 				}
 			case _: break
