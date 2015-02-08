@@ -181,7 +181,7 @@ class Player : SKSpriteNode {
 						let sequence = SKAction.sequence([animation, end])
 						runAction(sequence)
 						
-						let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 2
+						let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 4
 						for i in -bulletCount...bulletCount
 						{
 							let pSize = size

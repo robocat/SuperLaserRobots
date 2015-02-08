@@ -14,7 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var players: [Player] = []
 	var map: Map!
 	var infoViews : [Player: PlayerInfo] = [:]
-	var countdown = SKLabelNode(fontNamed: "PT Mono")
+	var countdown = SKLabelNode(fontNamed: "Pixeleris")
 	var firstTime : CFTimeInterval?
 	
 	// MARK: Set Up
@@ -37,10 +37,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		countdown.text = "00:00"
 		countdown.zPosition = 10000
 		addChild(countdown)
-		
-		runAction(SKAction.sequence([SKAction.waitForDuration(10), SKAction.runBlock({
-			
-		})]))
     }
 	
 	func setupBorders() {
