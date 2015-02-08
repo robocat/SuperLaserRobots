@@ -31,7 +31,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		
 		countdown.fontSize = 54
 		countdown.position = CGPoint(x: 0, y: size.height / 2 - 60)
-		//countdown.size = CGSize(width: 200, height: 60)
 		countdown.verticalAlignmentMode = .Center
 		countdown.horizontalAlignmentMode = .Center
 		countdown.fontColor = .blackColor()
@@ -42,8 +41,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		runAction(SKAction.sequence([SKAction.waitForDuration(10), SKAction.runBlock({
 			
 		})]))
-
-		position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
     }
 	
 	func setupBorders() {
