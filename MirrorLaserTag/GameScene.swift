@@ -50,6 +50,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		
 		let wait = SKAction.waitForDuration(10, withRange: 5)
 		let runBlock = SKAction.runBlock {
+			if self.waiting {
+				return
+			}
 			self.dropRandomPowerUp()
 		}
 		let seq = SKAction.sequence([wait, runBlock])
