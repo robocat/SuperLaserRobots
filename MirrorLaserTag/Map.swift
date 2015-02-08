@@ -19,7 +19,7 @@ class Map: SKSpriteNode {
 		self.players = players
 		self.level = level
 		
-		for x in 0...(Int(size.width) / 50) {
+		for x in 0..<(Int(size.width) / 50) {
 			for y in 0...(Int(size.height) / 50) {
 				let tile = SKSpriteNode(texture: SKTexture(imageNamed: "tile"))
 				tile.position = CGPoint(
