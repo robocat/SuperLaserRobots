@@ -129,6 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player1.position = CGPoint(x: -370, y: -320)
 		player1.zRotation = -π / 4
 		player1.playerColor = "green"
+		player1.playerName = "Green robot"
 		players.append(player1)
 		
 		let player2 = Player()
@@ -136,6 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player2.position = CGPoint(x: 370, y: 320)
 		player2.zRotation = π * 0.75
 		player2.playerColor = "blue"
+		player2.playerName = "Blue robot"
 		players.append(player2)
 		
 		let player3 = Player()
@@ -143,6 +145,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player3.position = CGPoint(x: 370, y: -320)
 		player3.zRotation = π / 4
 		player3.playerColor = "purple"
+		player3.playerName = "Purple robot"
 		players.append(player3)
 		
 		let player4 = Player()
@@ -150,6 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player4.position = CGPoint(x: -370, y: 320)
 		player4.zRotation = -π * 0.75
 		player4.playerColor = "red"
+		player4.playerName = "Red robot"
 		players.append(player4)
 
 		for player in players {
