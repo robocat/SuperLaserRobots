@@ -51,6 +51,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		countdown.zPosition = 10000
 		addChild(countdown)
 		
+
+		let wait = SKAction.waitForDuration(10, withRange: 5)
+		let runBlock = SKAction.runBlock {
+			if self.waiting {
+				return
+			}
+			self.dropRandomPowerUp()
+		}
+		let seq = SKAction.sequence([wait, runBlock])
+		let repeat = SKAction.repeatActionForever(seq)
+		
+		runAction(repeat)
+
+		startLobbyMusic()
+    }
+	
+	func dropRandomPowerUp() {
+		let randomPoints:[CGPoint] = [
+			CGPoint(x: 0, y: 0),
+			CGPoint(x: -100, y: -200),
+			CGPoint(x: 300, y: -300),
+			CGPoint(x: 200, y:  40)
+		]
+		
+		let powerUp = PowerUp(type: .Health)
+		let range = Range(start: UInt32(0), end: UInt32(randomPoints.count - 1))
+		let index = Int.random(range)
+		powerUp.position = randomPoints[Int(index)]
+		
+		map.addChild(powerUp)
+
 		startLobbyMusic()
     }
 	
@@ -100,6 +131,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player1.position = CGPoint(x: -370, y: -320)
 		player1.zRotation = -π / 4
 		player1.playerColor = "green"
+		player1.playerName = "Green robot"
 		players.append(player1)
 		
 		let player2 = Player()
@@ -107,6 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player2.position = CGPoint(x: 370, y: 320)
 		player2.zRotation = π * 0.75
 		player2.playerColor = "blue"
+		player2.playerName = "Blue robot"
 		players.append(player2)
 		
 		let player3 = Player()
@@ -114,6 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player3.position = CGPoint(x: 370, y: -320)
 		player3.zRotation = π / 4
 		player3.playerColor = "purple"
+		player3.playerName = "Purple robot"
 		players.append(player3)
 		
 		let player4 = Player()
@@ -121,6 +155,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		player4.position = CGPoint(x: -370, y: 320)
 		player4.zRotation = -π * 0.75
 		player4.playerColor = "red"
+		player4.playerName = "Red robot"
 		players.append(player4)
 
 		for player in players {
@@ -325,6 +360,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 			}
 		}
 		switch collision {
+		case PhysicsType.PowerUp.rawValue | PhysicsType.Player.rawValue:
+			if let player = contact.bodyA.node as? Player {
+				player.health = min(player.health + 20, 100)
+
+				contact.bodyB.node?.removeFromParent()
+			}
+			return
 		case PhysicsType.Projectile.rawValue | PhysicsType.Mirror.rawValue:
 			// Change the trajectory and/or velocity of the projectile
 			if let node = contact.bodyB.node {
@@ -350,7 +392,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 				}
 				if let player = contact.bodyA.node as? Player {
 					//player.lastReceivedDamageFrom = node.firedBy
-					player.health -= 1
+					player.health -= 2
 					
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
 					

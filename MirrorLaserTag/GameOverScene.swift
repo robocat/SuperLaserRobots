@@ -32,24 +32,46 @@ class GameOverScene : SKScene {
 		for i in 0..<players!.count
 		{
 			let player = players![i]
-			let score = SKLabelNode(fontNamed: "Pixeleris")
-			score.fontSize = 40
+			if !player.inGame {
+				continue
+			}
+			let scoreName = SKLabelNode(fontNamed: "Pixeleris")
+			scoreName.fontSize = 40
+			scoreName.horizontalAlignmentMode = .Left
 			switch player.playerColor {
 				case "red":
-				score.fontColor = .redColor()
+				scoreName.fontColor = .redColor()
 				case "green":
-				score.fontColor = .greenColor()
+				scoreName.fontColor = .greenColor()
 				case "blue":
-				score.fontColor = .blueColor()
+				scoreName.fontColor = .blueColor()
 				case "purple":
-				score.fontColor = .purpleColor()
+				scoreName.fontColor = .purpleColor()
 				default:
-				score.fontColor = .whiteColor()
+				scoreName.fontColor = .whiteColor()
 			}
+			scoreName.position = CGPoint(x: -160, y: -50 * (i+1))
+			scoreName.text = "\(player.playerName)"
+			addChild(scoreName)
 			
-			score.position = CGPoint(x: 0, y: -50 * (i+1))
-			score.text += "\(player.playerName)\t\t\(player.score)"
-			addChild(score)
+			let scorePoint = SKLabelNode(fontNamed: "Pixeleris")
+			scorePoint.fontSize = 40
+			scorePoint.horizontalAlignmentMode = .Left
+			switch player.playerColor {
+			case "red":
+				scorePoint.fontColor = .redColor()
+			case "green":
+				scorePoint.fontColor = .greenColor()
+			case "blue":
+				scorePoint.fontColor = .blueColor()
+			case "purple":
+				scorePoint.fontColor = .purpleColor()
+			default:
+				scorePoint.fontColor = .whiteColor()
+			}
+			scorePoint.position = CGPoint(x: 140, y: -50 * (i+1))
+			scorePoint.text = "\(player.score)"
+			addChild(scorePoint)
 		}
 		
 		addChild(title)
