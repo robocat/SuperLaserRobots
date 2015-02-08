@@ -24,6 +24,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var waitings : [String: SKSpriteNode] = [:]
 	var waiting = true
 	
+	var musicPlayer : MusicPlayer?
+	var lobbyPlayer : MusicPlayer?
+	
 	// MARK: Set Up
 	
     override func didMoveToView(view: SKView) {
@@ -47,7 +50,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		countdown.text = "00:00"
 		countdown.zPosition = 10000
 		addChild(countdown)
+		
+
+		let wait = SKAction.waitForDuration(10, withRange: 5)
+		let runBlock = SKAction.runBlock {
+			if self.waiting {
+				return
+			}
+			self.dropRandomPowerUp()
+		}
+		let seq = SKAction.sequence([wait, runBlock])
+		let repeat = SKAction.repeatActionForever(seq)
+		
+		runAction(repeat)
+
+		startLobbyMusic()
     }
+	
+	func dropRandomPowerUp() {
+		let randomPoints:[CGPoint] = [
+			CGPoint(x: 0, y: 0),
+			CGPoint(x: -100, y: -200),
+			CGPoint(x: 300, y: -300),
+			CGPoint(x: 200, y:  40)
+		]
+		
+		let powerUp = PowerUp(type: .Health)
+		let range = Range(start: UInt32(0), end: UInt32(randomPoints.count - 1))
+		let index = Int.random(range)
+		powerUp.position = randomPoints[Int(index)]
+		
+		map.addChild(powerUp)
+
+		startLobbyMusic()
+    }
+	
+	func startLobbyMusic() {
+		musicPlayer?.pause()
+		let path = NSBundle.mainBundle().URLForResource("LaserDisco", withExtension: "wav")!
+		lobbyPlayer = MusicPlayer(fileURL: path)
+		lobbyPlayer?.play()
+	}
+	
+	func startGameMusic() {
+		lobbyPlayer?.pause()
+		let path = NSBundle.mainBundle().URLForResource("LaserMusic", withExtension: "mp3")!
+		musicPlayer = MusicPlayer(fileURL: path)
+		musicPlayer?.play()
+	}
 	
 	func setupBorders() {
 		let top = SKSpriteNode(imageNamed: "topwall")
@@ -222,6 +272,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 				waiting2.removeFromParent()
 				waiting3.removeFromParent()
 				waiting4.removeFromParent()
+				startGameMusic()
 				
 				for (player, infoView) in infoViews {
 					if !player.inGame {
@@ -309,6 +360,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 			}
 		}
 		switch collision {
+		case PhysicsType.PowerUp.rawValue | PhysicsType.Player.rawValue:
+			if let player = contact.bodyA.node as? Player {
+				player.health = min(player.health + 20, 100)
+
+				contact.bodyB.node?.removeFromParent()
+			}
+			return
 		case PhysicsType.Projectile.rawValue | PhysicsType.Mirror.rawValue:
 			// Change the trajectory and/or velocity of the projectile
 			if let node = contact.bodyB.node {
@@ -334,7 +392,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 				}
 				if let player = contact.bodyA.node as? Player {
 					//player.lastReceivedDamageFrom = node.firedBy
-					player.health -= 1
+					player.health -= 2
 					
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
 					

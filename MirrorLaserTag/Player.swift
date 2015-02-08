@@ -93,8 +93,9 @@ class Player : SKSpriteNode {
 	func playAnimation(state : State, frames : [SKTexture]) {
 		if self.state != state {
 			self.state = state
-			let animation = SKAction.animateWithTextures(frames, timePerFrame: 0.1)
-			let action = SKAction.repeatActionForever(animation)
+			
+			let aninmation = SKAction.animateWithTextures(frames, timePerFrame: 0.1)
+			let action = SKAction.repeatActionForever(aninmation)
 			runAction(action)
 		}
 	}

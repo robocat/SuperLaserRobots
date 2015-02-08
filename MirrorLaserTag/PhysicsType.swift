@@ -13,4 +13,5 @@ enum PhysicsType: UInt32 {
 	case Obstacle = 2
 	case Mirror = 4
 	case Projectile = 8
+	case PowerUp = 16
 }
