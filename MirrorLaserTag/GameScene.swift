@@ -41,7 +41,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		runAction(SKAction.sequence([SKAction.waitForDuration(10), SKAction.runBlock({
 			
 		})]))
+		
+		let wait = SKAction.waitForDuration(10, withRange: 5)
+		let runBlock = SKAction.runBlock {
+			self.dropRandomPowerUp()
+		}
+		let seq = SKAction.sequence([wait, runBlock])
+		let repeat = SKAction.repeatActionForever(seq)
+		
+		runAction(repeat)
     }
+	
+	func dropRandomPowerUp() {
+		let randomPoints:[CGPoint] = [
+			CGPoint(x: 0, y: 0),
+			CGPoint(x: -100, y: -200),
+			CGPoint(x: 300, y: -300),
+			CGPoint(x: 200, y:  40)
+		]
+		
+		let powerUp = PowerUp(type: .Health)
+		let range = Range(start: UInt32(0), end: UInt32(randomPoints.count - 1))
+		let index = Int.random(range)
+		powerUp.position = randomPoints[Int(index)]
+		
+		map.addChild(powerUp)
+	}
 	
 	func setupBorders() {
 		let top = SKSpriteNode(imageNamed: "topwall")
@@ -228,6 +253,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 			}
 		}
 		switch collision {
+		case PhysicsType.PowerUp.rawValue | PhysicsType.Player.rawValue:
+			if let player = contact.bodyA.node as? Player {
+				player.health = min(player.health + 20, 100)
+
+				contact.bodyB.node?.removeFromParent()
+			}
+			return
 		case PhysicsType.Projectile.rawValue | PhysicsType.Mirror.rawValue:
 			// Change the trajectory and/or velocity of the projectile
 			if let node = contact.bodyB.node {
@@ -249,7 +281,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 				}
 				if let player = contact.bodyA.node as? Player {
 					//player.lastReceivedDamageFrom = node.firedBy
-					player.health -= 1
+					player.health -= 2
 					
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
 					
