@@ -48,7 +48,22 @@ struct Level {
 						position: CGPoint(x: 372, y: 0),
 						angle: 0,
 						flipped: true,
-						size: CGSize(width: 254, height: 14))
+						size: CGSize(width: 254, height: 14)),
+					ObstaclePosition(type: .Computer,
+						position: CGPoint(x: 76, y: 302),
+						angle: 0,
+						flipped: false,
+						size: CGSize(width: 156, height: 204)),
+					ObstaclePosition(type: .Tube,
+						position: CGPoint(x: 401, y: -99),
+						angle: 0,
+						flipped: false,
+						size: CGSize(width: 98, height: 98)),
+					ObstaclePosition(type: .Tube,
+						position: CGPoint(x: -49, y: -299),
+						angle: 0,
+						flipped: false,
+						size: CGSize(width: 98, height: 98))
 				])
 			]
 		}
