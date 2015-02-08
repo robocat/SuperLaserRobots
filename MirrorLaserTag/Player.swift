@@ -21,6 +21,7 @@ class Player : SKSpriteNode {
 	var shouldTurnLeft: Bool = false
 	var shouldTurnRight: Bool = false
 	var shouldMoveFoward: Bool = false
+	var shouldMoveBackward: Bool = false
 	
 	var health : Int = 100 {
 		didSet {
@@ -132,6 +133,10 @@ class Player : SKSpriteNode {
 			}
 			if shouldMoveFoward {
 				let vector = CGVector(dx: sin(-zRotation), dy: cos(zRotation)) * pixelsPerSecond * CGFloat(timePassed)
+				physicsBody?.applyImpulse(vector)
+				moving = true
+			} else if shouldMoveBackward {
+				let vector = CGVector(dx: sin(zRotation), dy: cos(-zRotation)) * pixelsPerSecond * CGFloat(timePassed)
 				physicsBody?.applyImpulse(vector)
 				moving = true
 			}
