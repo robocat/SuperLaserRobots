@@ -400,6 +400,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 					
 					let fire = SKSpriteNode(texture: SKTexture(imageNamed: "fire"))
 					
+					let animation = ["exp1", "exp2", "exp3"].map { SKTexture(imageNamed: $0)! }
+					let action = SKAction.animateWithTextures(animation, timePerFrame: 0.3)
+					fire.runAction(action)
+					
 					// This is fucked now
 					//fire.position = convertPoint(contact.contactPoint, toNode: map)
 					
@@ -413,8 +417,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 					let sound = SKAction.playSoundFileNamed("Hit.wav", waitForCompletion: false)
 					let group = SKAction.group([scale, fade, sound])
 					let remove = SKAction.runBlock { fire.removeFromParent() }
-					let action = SKAction.sequence([group, remove])
-					fire.runAction(action)
+					let action2 = SKAction.sequence([group, remove])
+					fire.runAction(action2)
 				}
 				if let player = contact.bodyB.node as? Player {
 					//player.lastReceivedDamageFrom = node.firedBy
