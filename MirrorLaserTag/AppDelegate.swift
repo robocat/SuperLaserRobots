@@ -19,16 +19,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var musicPlayer : MusicPlayer?
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-		let scene = StartScene(size: CGSize(width: 1024, height: 768))
-		scene.scaleMode = .AspectFit
+//		let scene = StartScene(size: CGSize(width: 1024, height: 768))
+//		scene.scaleMode = .AspectFit
 		
-		self.skView!.presentScene(scene)
+		if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
+			/* Set the scale mode to scale to fit the window */
+			scene.scaleMode = .AspectFit
+			
+			let transition = SKTransition.crossFadeWithDuration(0.3)
+			self.skView?.presentScene(scene)
+		}
+		
+//		self.skView!.presentScene(scene)
 		
 		/* Sprite Kit applies additional optimizations to improve rendering performance */
 		self.skView!.ignoresSiblingOrder = true
 		
-		self.skView!.showsFPS = true
-		self.skView!.showsNodeCount = true
+//		self.skView!.showsFPS = true
+//		self.skView!.showsNodeCount = true
 			
 		setupMusic()
     }

@@ -40,6 +40,7 @@ class Player : SKSpriteNode {
 	var playerColor : String = "green" { didSet { texture = SKTexture(imageNamed: "\(playerColor)1") } }
 	var score: Int = 0 { didSet { playerInfo?.killCount.text = "\(self.score)" }}
 	//var lastReceivedDamageFrom : Player? = nil
+	var inGame = false
 	
 	weak var delegate : PlayerDelegate?
 	weak var map : Map?
@@ -49,7 +50,9 @@ class Player : SKSpriteNode {
 		playerName = "Anonymous"
 		super.init(texture: nil, color: nil, size: CGSize(width: 96, height: 96))
 		direction = 0
-		setupPhysics()
+		//setupPhysics()
+		hidden = true
+		dead = true
 		
 		let heal = SKAction.runBlock { if !self.dead { self.health = min(self.health + 1, 100) } }
 		let wait = SKAction.waitForDuration(3)
@@ -182,7 +185,7 @@ class Player : SKSpriteNode {
 						let sequence = SKAction.sequence([animation, end])
 						runAction(sequence)
 						
-						let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 2
+						let bulletCount = Int((100.0 - CGFloat(health)) / 10.0) / 4	
 						for i in -bulletCount...bulletCount
 						{
 							let pSize = size
