@@ -50,7 +50,6 @@ class Player : SKSpriteNode {
 		playerName = "Anonymous"
 		super.init(texture: nil, color: nil, size: CGSize(width: 96, height: 96))
 		direction = 0
-		//setupPhysics()
 		hidden = true
 		dead = true
 		
