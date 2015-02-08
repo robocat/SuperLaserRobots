@@ -24,6 +24,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var waitings : [String: SKSpriteNode] = [:]
 	var waiting = true
 	
+	var musicPlayer : MusicPlayer?
+	var lobbyPlayer : MusicPlayer?
+	
 	// MARK: Set Up
 	
     override func didMoveToView(view: SKView) {
@@ -47,7 +50,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		countdown.text = "00:00"
 		countdown.zPosition = 10000
 		addChild(countdown)
+		
+		startLobbyMusic()
     }
+	
+	func startLobbyMusic() {
+		musicPlayer?.pause()
+		let path = NSBundle.mainBundle().URLForResource("LaserDisco", withExtension: "wav")!
+		lobbyPlayer = MusicPlayer(fileURL: path)
+		lobbyPlayer?.play()
+	}
+	
+	func startGameMusic() {
+		lobbyPlayer?.pause()
+		let path = NSBundle.mainBundle().URLForResource("LaserMusic", withExtension: "mp3")!
+		musicPlayer = MusicPlayer(fileURL: path)
+		musicPlayer?.play()
+	}
 	
 	func setupBorders() {
 		let top = SKSpriteNode(imageNamed: "topwall")
@@ -214,6 +233,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 				waiting2.removeFromParent()
 				waiting3.removeFromParent()
 				waiting4.removeFromParent()
+				startGameMusic()
 			case _: break
 			}
 		} else {

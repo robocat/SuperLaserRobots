@@ -38,6 +38,7 @@
 		FF16FB131A861BAB009A0DFC /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */; };
 		FF6150341A86702B00C42AFB /* LaserMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF6150331A86702B00C42AFB /* LaserMusic.mp3 */; };
 		FF6150361A86706600C42AFB /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6150351A86706600C42AFB /* MusicPlayer.swift */; };
+		FF9E48D91A87835E00E9A8ED /* LaserDisco.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF9E48D81A87835E00E9A8ED /* LaserDisco.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		FF16FB121A861BAB009A0DFC /* PlayerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
 		FF6150331A86702B00C42AFB /* LaserMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LaserMusic.mp3; sourceTree = "<group>"; };
 		FF6150351A86706600C42AFB /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		FF9E48D81A87835E00E9A8ED /* LaserDisco.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = LaserDisco.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				FF6150331A86702B00C42AFB /* LaserMusic.mp3 */,
+				FF9E48D81A87835E00E9A8ED /* LaserDisco.wav */,
 			);
 			name = Music;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				8162EF261A8572EA00B230AD /* MainMenu.xib in Resources */,
 				81CB89D31A86799100E8A932 /* Laser2.wav in Resources */,
 				81838EEA1A86CBA3007D21AD /* Respawn.wav in Resources */,
+				FF9E48D91A87835E00E9A8ED /* LaserDisco.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
