@@ -219,6 +219,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 						if command == .Fire {
 							let waitingNode = waitings[player.playerColor]!
 							waitingNode.texture = SKTexture(imageNamed: "\(player.playerColor)")
+							player.hidden = false
+							player.dead = false
+							player.inGame = true
+							player.setupPhysics()
 						}
 					}
 				}
@@ -234,6 +238,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 				waiting3.removeFromParent()
 				waiting4.removeFromParent()
 				startGameMusic()
+				
+				for (player, infoView) in infoViews {
+					if !player.inGame {
+						infoView.removeFromParent()
+					}
+				}
 			case _: break
 			}
 		} else {
@@ -262,23 +272,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		}
 	}
     
-    override func update(currentTime: CFTimeInterval) {
-		if firstTime == nil {
-			firstTime = currentTime
-		}
+	override func update(currentTime: CFTimeInterval) {
 		var elapsedTime = currentTime - time
 		time = currentTime
 		
-		let gameLength = 3
-		
-		let minutes = Int(currentTime - firstTime!) / 60
-		let seconds = (Int(currentTime - firstTime!) % 60)
-		let milliseconds = 100 - Int(((currentTime - firstTime!) - Double(seconds)) * 100)
-		let formatted = NSString(format: "%02d:%02d",gameLength-1 - minutes, 60 - seconds)
-		countdown.text = formatted
-		
-		if minutes >= gameLength {
-			moveToGameOversScene()
+		if firstTime == nil && !waiting {
+			firstTime = currentTime
+		}
+		if firstTime != nil && !waiting {
+			let gameLength = 3
+			
+			let minutes = Int(currentTime - firstTime!) / 60
+			let seconds = (Int(currentTime - firstTime!) % 60)
+			let milliseconds = 100 - Int(((currentTime - firstTime!) - Double(seconds)) * 100)
+			let formatted = NSString(format: "%02d:%02d",gameLength-1 - minutes, 60 - seconds)
+			countdown.text = formatted
+			
+			if minutes >= gameLength {
+				moveToGameOversScene()
+			}
 		}
 
 		for player in players {
