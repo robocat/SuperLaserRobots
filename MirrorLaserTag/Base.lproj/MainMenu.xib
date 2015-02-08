@@ -100,7 +100,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="MirrorLaserTag" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+        <window title="Super Laser Robots" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1400" height="900"/>
@@ -121,7 +121,7 @@
                 </constraints>
             </view>
         </window>
-        <customObject id="494" customClass="AppDelegate" customModule="MirrorLaserTag" customModuleProvider="target">
+        <customObject id="494" customClass="AppDelegate" customModule="Laser_Robots" customModuleProvider="target">
             <connections>
                 <outlet property="skView" destination="539" id="540"/>
                 <outlet property="window" destination="371" id="532"/>

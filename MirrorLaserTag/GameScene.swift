@@ -52,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		addChild(countdown)
 		
 
-		let wait = SKAction.waitForDuration(10, withRange: 5)
+		let wait = SKAction.waitForDuration(20, withRange: 5)
 		let runBlock = SKAction.runBlock {
 			if self.waiting {
 				return
@@ -81,8 +81,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		powerUp.position = randomPoints[Int(index)]
 		
 		map.addChild(powerUp)
-
-		startLobbyMusic()
     }
 	
 	func startLobbyMusic() {
@@ -362,7 +360,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		switch collision {
 		case PhysicsType.PowerUp.rawValue | PhysicsType.Player.rawValue:
 			if let player = contact.bodyA.node as? Player {
-				player.health = min(player.health + 20, 100)
+				player.health = min(player.health + 30, 100)
 
 				contact.bodyB.node?.removeFromParent()
 			}

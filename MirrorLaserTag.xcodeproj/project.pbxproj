@@ -70,7 +70,7 @@
 
 /* Begin PBXFileReference section */
 		372DA0231A86AAAD0059C36F /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
-		8162EF171A8572E900B230AD /* MirrorLaserTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MirrorLaserTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8162EF171A8572E900B230AD /* Super Laser Robots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Laser Robots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8162EF1B1A8572E900B230AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8162EF1C1A8572E900B230AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8162EF1E1A8572EA00B230AD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 		8162EF181A8572E900B230AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8162EF171A8572E900B230AD /* MirrorLaserTag.app */,
+				8162EF171A8572E900B230AD /* Super Laser Robots.app */,
 				8162EF2B1A8572EA00B230AD /* MirrorLaserTagTests.xctest */,
 			);
 			name = Products;
@@ -274,7 +274,7 @@
 			);
 			name = MirrorLaserTag;
 			productName = MirrorLaserTag;
-			productReference = 8162EF171A8572E900B230AD /* MirrorLaserTag.app */;
+			productReference = 8162EF171A8572E900B230AD /* Super Laser Robots.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8162EF2A1A8572EA00B230AD /* MirrorLaserTagTests */ = {
@@ -506,7 +506,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MirrorLaserTag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Super Laser Robots";
 			};
 			name = Debug;
 		};
@@ -517,7 +517,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MirrorLaserTag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Super Laser Robots";
 			};
 			name = Release;
 		};
