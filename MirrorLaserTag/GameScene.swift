@@ -109,22 +109,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		health1.position = CGPoint(x: -600 , y: -410)
 		
 		infoViews[players[0]] = health1
+		players[0].playerInfo = health1
 
 		let health2 = PlayerInfo(leftMode: false, playerColor: players[1
 			].playerColor)
 		addChild(health2)
 		health2.position = CGPoint(x: 600, y: 410)
 		infoViews[players[1]] = health2
+		players[1].playerInfo = health2
 
 		let health3 = PlayerInfo(leftMode: true, playerColor: players[2].playerColor)
 		addChild(health3)
 		health3.position = CGPoint(x: 600, y: -410)
 		infoViews[players[2]] = health3
+		players[2].playerInfo = health3
 
 		let health4 = PlayerInfo(leftMode: false, playerColor: players[3].playerColor)
 		addChild(health4)
 		health4.position = CGPoint(x: -600, y: 410)
 		infoViews[players[3]] = health4
+		players[3].playerInfo = health4
 	}
 	
 	func setupMap() {
@@ -275,6 +279,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		}
 		
 		if player.health <= 0 {
+//			player
 			player.score += 1
 			player.dead = true
 			player.hidden = true

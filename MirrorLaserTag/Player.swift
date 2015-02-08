@@ -16,6 +16,7 @@ class Player : SKSpriteNode {
 	var direction : CGFloat = 0 { didSet { updateDirection() } }
 	
 	var controls: Controls!
+	weak var playerInfo: PlayerInfo?
 	
 	var shouldTurnLeft: Bool = false
 	var shouldTurnRight: Bool = false
@@ -37,7 +38,7 @@ class Player : SKSpriteNode {
 	var playerName : String
 	var dead = false
 	var playerColor : String = "green" { didSet { texture = SKTexture(imageNamed: "\(playerColor)1") } }
-	var score = 0
+	var score: Int = 0 { didSet { playerInfo?.killCount.text = "\(self.score)" }}
 	//var lastReceivedDamageFrom : Player? = nil
 	
 	weak var delegate : PlayerDelegate?
