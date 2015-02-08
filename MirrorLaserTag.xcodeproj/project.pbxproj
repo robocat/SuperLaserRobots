@@ -43,6 +43,7 @@
 		FF6150341A86702B00C42AFB /* LaserMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FF6150331A86702B00C42AFB /* LaserMusic.mp3 */; };
 		FF6150361A86706600C42AFB /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6150351A86706600C42AFB /* MusicPlayer.swift */; };
 		FF9E48D91A87835E00E9A8ED /* LaserDisco.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF9E48D81A87835E00E9A8ED /* LaserDisco.wav */; };
+		FF9E48DB1A878BD100E9A8ED /* Drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF9E48DA1A878BD100E9A8ED /* Drop.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		FF6150331A86702B00C42AFB /* LaserMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LaserMusic.mp3; sourceTree = "<group>"; };
 		FF6150351A86706600C42AFB /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		FF9E48D81A87835E00E9A8ED /* LaserDisco.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = LaserDisco.wav; sourceTree = "<group>"; };
+		FF9E48DA1A878BD100E9A8ED /* Drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Drop.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 				81CB89CD1A86799100E8A932 /* Ricochet1.wav */,
 				81CB89CE1A86799100E8A932 /* Ricochet2.wav */,
 				81CB89CF1A86799100E8A932 /* Ricochet3.wav */,
+				FF9E48DA1A878BD100E9A8ED /* Drop.wav */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				81CB89D51A86799100E8A932 /* Ricochet1.wav in Resources */,
 				81838EF61A8778B9007D21AD /* Drive_purple.wav in Resources */,
 				81CB89D61A86799100E8A932 /* Ricochet2.wav in Resources */,
+				FF9E48DB1A878BD100E9A8ED /* Drop.wav in Resources */,
 				81CB89D01A86799100E8A932 /* Dead.wav in Resources */,
 				8162EF211A8572EA00B230AD /* GameScene.sks in Resources */,
 				8162EF231A8572EA00B230AD /* Images.xcassets in Resources */,

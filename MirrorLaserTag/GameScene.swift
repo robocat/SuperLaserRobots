@@ -82,6 +82,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		powerUp.position = randomPoints[Int(index)]
 		
 		map.addChild(powerUp)
+		
+		runAction(SKAction.playSoundFileNamed("Drop.wav", waitForCompletion: false))
     }
 	
 	func startLobbyMusic() {
