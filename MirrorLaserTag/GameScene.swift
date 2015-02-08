@@ -24,6 +24,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 	var waitings : [String: SKSpriteNode] = [:]
 	var waiting = true
 	
+	var musicPlayer : MusicPlayer?
+	var lobbyPlayer : MusicPlayer?
+	
 	// MARK: Set Up
 	
     override func didMoveToView(view: SKView) {
@@ -48,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		countdown.zPosition = 10000
 		addChild(countdown)
 		
+
 		let wait = SKAction.waitForDuration(10, withRange: 5)
 		let runBlock = SKAction.runBlock {
 			if self.waiting {
@@ -60,6 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		
 		runAction(repeat)
 
+		startLobbyMusic()
     }
 	
 	func dropRandomPowerUp() {
@@ -76,6 +81,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 		powerUp.position = randomPoints[Int(index)]
 		
 		map.addChild(powerUp)
+
+		startLobbyMusic()
+    }
+	
+	func startLobbyMusic() {
+		musicPlayer?.pause()
+		let path = NSBundle.mainBundle().URLForResource("LaserDisco", withExtension: "wav")!
+		lobbyPlayer = MusicPlayer(fileURL: path)
+		lobbyPlayer?.play()
+	}
+	
+	func startGameMusic() {
+		lobbyPlayer?.pause()
+		let path = NSBundle.mainBundle().URLForResource("LaserMusic", withExtension: "mp3")!
+		musicPlayer = MusicPlayer(fileURL: path)
+		musicPlayer?.play()
 	}
 	
 	func setupBorders() {
@@ -247,6 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, PlayerDelegate {
 				waiting2.removeFromParent()
 				waiting3.removeFromParent()
 				waiting4.removeFromParent()
+				startGameMusic()
 				
 				for (player, infoView) in infoViews {
 					if !player.inGame {

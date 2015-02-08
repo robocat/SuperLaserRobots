@@ -16,8 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var skView: SKView!
 	
-	var musicPlayer : MusicPlayer?
-    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
 //		let scene = StartScene(size: CGSize(width: 1024, height: 768))
 //		scene.scaleMode = .AspectFit
@@ -37,17 +35,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 //		self.skView!.showsFPS = true
 //		self.skView!.showsNodeCount = true
-			
-		setupMusic()
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
         return true
     }
-	
-	func setupMusic() {
-		let path = NSBundle.mainBundle().URLForResource("LaserMusic", withExtension: "mp3")!
-		musicPlayer = MusicPlayer(fileURL: path)
-		musicPlayer?.play()
-	}
 }
